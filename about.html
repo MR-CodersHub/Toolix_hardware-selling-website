@@ -1,0 +1,766 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Toolix Hardware Store</title>
+    <meta name="description"
+        content="Learn about Toolix, our story since 2001, our mission, vision, our specialized hardware consultants, and contractor supply expertise.">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Apply theme/RTL early to prevent visual flicker
+        if (localStorage.getItem('toolix-theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+        if (localStorage.getItem('toolix-dir') === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="container topbar-content">
+            <div class="topbar-info">
+                <span>📞 +1-800-AR-TOOLS (800-278-6657)</span>
+                <span>✉️ contractor-support@toolix.com</span>
+                <span>📍 123 Builders Way, Industrial Zone</span>
+            </div>
+            <div class="topbar-links">
+                <span>⏰ Mon-Sat: 7:00 AM - 7:00 PM</span>
+                <a href="contact.html">Store Locator</a>
+                <a href="services.html#contractor-portal">Contractor Account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-main">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="index.html" class="brand-logo" id="logoLink">
+                    <svg class="brand-icon" viewBox="0 0 24 24">
+                        <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                    </svg>
+                    <span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span>
+                </a>
+            </div>
+
+            <!-- Center: Main Navigation Menu -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home2.html">Home 2</a></li>
+                    <li class="active"><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="brands.html">Brands</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <button class="header-action-btn" id="themeToggleBtn" title="Toggle Light/Dark Mode">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sun-icon"
+                        style="display:none; width:20px; height:20px;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="moon-icon"
+                        style="width:20px; height:20px;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="header-action-btn" id="rtlToggleBtn" title="Toggle RTL/LTR Direction">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lang-icon"
+                        style="width:20px; height:20px;">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="user-menu-wrapper">
+                    <button class="header-action-btn" id="userAccountBtn" title="User Account">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width:20px; height:20px;">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="login.html" class="dropdown-item">Log In</a>
+                        <a href="signup.html" class="dropdown-item">Sign Up</a>
+                    </div>
+                </div>
+                <a href="cart.html" class="header-action-btn" title="Your Cart">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <span class="cart-count">3</span>
+                </a>
+                <!-- Burger menu link for Mobile screens -->
+                <button class="burger-menu" id="burgerMenuBtn" aria-label="Open navigation menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Sidebar Drawer -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="brand-logo" style="font-size: 22px;">
+                <svg class="brand-icon" style="width: 22px; height: 22px;" viewBox="0 0 24 24">
+                    <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                </svg>
+                <span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span>
+            </a>
+            <button class="mobile-close-btn" id="mobileCloseBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="home2.html">Home 2</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="brands.html">Brands</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="mobile-auth-section">
+            <a href="login.html" class="mobile-auth-btn mobile-login-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                    <polyline points="10 17 15 12 10 7" />
+                    <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+                Log In
+            </a>
+            <a href="signup.html" class="mobile-auth-btn mobile-signup-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <line x1="20" y1="8" x2="20" y2="14" />
+                    <line x1="23" y1="11" x2="17" y2="11" />
+                </svg>
+                Sign Up
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Header / Subpage Hero -->
+    <section class="subpage-hero about-hero">
+        <div class="container">
+            <span class="subpage-hero-eyebrow">Toolix Heritage</span>
+            <h1 class="subpage-hero-title">About Our Store</h1>
+
+            <div class="subpage-hero-breadcrumbs">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>About Us</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Intro Section (Premium Redesign) -->
+    <section class="about-intro-section fade-in">
+        <div class="container">
+            <div class="about-intro-grid">
+
+                <!-- Left: Multi-Image collage -->
+                <div class="about-intro-image-wrap">
+                    <div class="about-img-collage">
+                        <div class="about-img-main">
+                            <img src="images/store_interior.png" alt="Toolix Store Showroom Floor" loading="lazy">
+                        </div>
+
+                        <div class="about-floating-card">
+                            <div class="experience-year">25+</div>
+                            <div class="experience-text">Years of Building Trust</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Content Block -->
+                <div class="about-intro-content">
+                    <div class="about-content-inner">
+                        <span class="section-subtitle">25+ Years of Steel Solidity</span>
+                        <h2 class="about-heading">Toolix Heritage<br><span>&amp; Commitment</span></h2>
+
+                        <p class="about-lead">Founded in 2001, Toolix started as a local hardware storefront supplying
+                            structural nails and basic hand tools. Over two decades of customer-centric commitment
+                            helped us expand into the region's largest independent hardware provider.</p>
+
+                        <p class="about-desc">Today, our 50,000 sq ft showroom warehouse houses everything from
+                            professional computerized paint mixing terminals, heavy duty equipment rentals, and
+                            specialized electrical and plumbing fittings. <strong>We make building easy.</strong></p>
+
+                        <!-- Feature Chips -->
+                        <div class="about-features">
+                            <div class="about-feature-chip">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
+                                </svg>
+                                <span>50,000 sq ft Showroom</span>
+                            </div>
+                            <div class="about-feature-chip">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                                <span>1,500+ Licensed Builders</span>
+                            </div>
+                            <div class="about-feature-chip">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13" />
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                                    <circle cx="5.5" cy="18.5" r="2.5" />
+                                    <circle cx="18.5" cy="18.5" r="2.5" />
+                                </svg>
+                                <span>Same-Day Trade Delivery</span>
+                            </div>
+                            <div class="about-feature-chip">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                                </svg>
+                                <span>99% Delivery Accuracy</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section (Redesigned) -->
+    <section class="mv-section fade-in">
+        <div class="container">
+            <div class="mv-section-header">
+                <span class="section-subtitle">What Drives Our Excellence</span>
+                <h2 class="section-title">Purpose &amp; Ambition</h2>
+            </div>
+            <div class="mv-cards-grid">
+                <!-- Mission -->
+                <div class="mv-card mv-card--mission">
+                    <div class="mv-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </div>
+                    <div class="mv-card-tag">01 / Our Mission</div>
+                    <h3>Our Mission</h3>
+                    <p>Supply contractors and DIY homebuilders with the highest caliber structural supplies with
+                        reliable trade logistic shipping speeds — every order, every time.</p>
+                    <div class="mv-card-footer">
+                        <span>Quality</span><span>Reliability</span><span>Speed</span>
+                    </div>
+                </div>
+                <!-- Core Value -->
+                <div class="mv-card mv-card--values">
+                    <div class="mv-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                    </div>
+                    <div class="mv-card-tag">02 / Core Values</div>
+                    <h3>Core Values</h3>
+                    <p>Integrity in every transaction, excellence in every product, and partnership with every client.
+                        We build lasting relationships on the foundation of trust.</p>
+                    <div class="mv-card-footer">
+                        <span>Integrity</span><span>Excellence</span><span>Partnership</span>
+                    </div>
+                </div>
+                <!-- Vision -->
+                <div class="mv-card mv-card--vision">
+                    <div class="mv-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </div>
+                    <div class="mv-card-tag">03 / Tech Vision</div>
+                    <h3>Our Vision</h3>
+                    <p>Establish modern, smart building supply centers across the nation, reducing downtime at
+                        construction sites via advanced digital catalog logistics.</p>
+                    <div class="mv-card-footer">
+                        <span>Innovation</span><span>Growth</span><span>Impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section (Redesigned) -->
+    <section class="stats-section fade-in">
+        <div class="stats-bg-strip"></div>
+        <div class="container">
+            <div class="stats-section-header">
+                <span class="section-subtitle">Toolix By The Numbers</span>
+                <h2>Store Achievements</h2>
+                <p>Two decades of reliable supply powering contractors, builders, and trades across the region.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="4" width="18" height="18" rx="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                    </div>
+                    <div class="stat-number" data-target="2001" data-suffix="">0</div>
+                    <div class="stat-label">Year Founded</div>
+                    <div class="stat-desc">Serving traders since 2001</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <path d="M16 10a4 4 0 01-8 0" />
+                        </svg>
+                    </div>
+                    <div class="stat-number" data-target="15" data-suffix="k+">0</div>
+                    <div class="stat-label">Stocked Products</div>
+                    <div class="stat-desc">Across 50k sq ft warehouse</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                            <path d="M16 3.13a4 4 0 010 7.75" />
+                        </svg>
+                    </div>
+                    <div class="stat-number" data-target="1200" data-suffix="+">0</div>
+                    <div class="stat-label">Contracting Firms</div>
+                    <div class="stat-desc">Active licensed partnerships</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
+                    </div>
+                    <div class="stat-number" data-target="99" data-suffix="%">0</div>
+                    <div class="stat-label">Delivery Accuracy</div>
+                    <div class="stat-desc">Industry-leading fulfillment rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Members section (Redesigned) -->
+    <section class="section-padding fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Our Hardware Experts</span>
+                <h2 class="section-title">Leadership &amp; Staff</h2>
+            </div>
+
+            <div class="team-grid">
+                <!-- 1 -->
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="images/staff_raymond.png" alt="Raymond Vance – Chief Store Manager" />
+                        <div class="team-social-overlay">
+                            <a href="#" class="team-social-btn" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                    </path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                            <a href="mailto:raymond@toolix.com" class="team-social-btn" aria-label="Email">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4>Raymond Vance</h4>
+                        <span>Chief Store Manager</span>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="images/staff_tyler.png" alt="Tyler Brandson – Power Tools Consultant" />
+                        <div class="team-social-overlay">
+                            <a href="#" class="team-social-btn" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                    </path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                            <a href="mailto:tyler@toolix.com" class="team-social-btn" aria-label="Email">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4>Tyler Brandson</h4>
+                        <span>Power Tools Consultant</span>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="images/staff_samantha.png" alt="Samantha Sterling – Logistics Dispatcher" />
+                        <div class="team-social-overlay">
+                            <a href="#" class="team-social-btn" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                    </path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                            <a href="mailto:samantha@toolix.com" class="team-social-btn" aria-label="Email">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4>Samantha Sterling</h4>
+                        <span>Logistics Dispatcher</span>
+                    </div>
+                </div>
+                <!-- 4 -->
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="images/staff_marcus_k.png" alt="Marcus Klay – Paint Mixing Specialist" />
+                        <div class="team-social-overlay">
+                            <a href="#" class="team-social-btn" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                    </path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                            <a href="mailto:marcus@toolix.com" class="team-social-btn" aria-label="Email">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4>Marcus Klay</h4>
+                        <span>Paint Mixing Specialist</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Core Values -->
+    <section class="section-padding bg-beige fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">How We Build Trust</span>
+                <h2 class="section-title">Our Core Values</h2>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path
+                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                    </div>
+                    <h3>True Quality</h3>
+                    <p>We stock only verified safety and heavy duty tools backed by lifetime or manufacturer guarantees.
+                    </p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3>Honest Pricing</h3>
+                    <p>Transparent builder bulk rates with no hidden processing fees or custom delivery surcharges.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3>Logistics Speed</h3>
+                    <p>Guaranteed site deliveries dispatched from our depot within 2 working hours across the industrial
+                        zone.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M18.364 5.636l-3.536 3.536m0 0A7.5 7.5 0 1110.5 8.25m3.328 1.48L19.5 4.5" />
+                        </svg>
+                    </div>
+                    <h3>Tech Advisory</h3>
+                    <p>Engineers and paint mixing specialists on call to resolve tool dimensions & structural
+                        compatibility details.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Key Milestones Timeline -->
+    <section class="section-padding milestone-section fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Our Journey</span>
+                <h2 class="section-title">Milestones Timeline</h2>
+            </div>
+
+            <div class="milestones-track">
+
+                <!-- Line -->
+                <div class="milestones-line"></div>
+
+                <!-- Card 1 -->
+                <div class="milestone-card ms-card-top">
+                    <div class="ms-icon-wrap">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                    </div>
+                    <div class="ms-dot"><span>01</span></div>
+                    <div class="ms-body">
+                        <span class="ms-year">2001</span>
+                        <h3 class="ms-title">Store Foundation</h3>
+                        <p class="ms-desc">Toolix storefront established with 3 employees supplying hardware components
+                            to regional carpenters and local builders.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="milestone-card ms-card-bottom">
+                    <div class="ms-body ms-body-bottom">
+                        <span class="ms-year">2010</span>
+                        <h3 class="ms-title">Warehouse Scaling</h3>
+                        <p class="ms-desc">Expanded to a 20,000 sq ft showroom warehouse and integrated dynamic custom
+                            paint-mixing devices and bulk shelving.</p>
+                    </div>
+                    <div class="ms-dot"><span>02</span></div>
+                    <div class="ms-icon-wrap ms-icon-bottom">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="1" y="3" width="15" height="13" />
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                            <circle cx="5.5" cy="18.5" r="2.5" />
+                            <circle cx="18.5" cy="18.5" r="2.5" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="milestone-card ms-card-top">
+                    <div class="ms-icon-wrap">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                            <line x1="12" y1="12" x2="12" y2="12" />
+                            <path d="M6 12h.01M12 12h.01M18 12h.01" />
+                        </svg>
+                    </div>
+                    <div class="ms-dot"><span>03</span></div>
+                    <div class="ms-body">
+                        <span class="ms-year">2018</span>
+                        <h3 class="ms-title">Contractor Credit Line</h3>
+                        <p class="ms-desc">Launched the licensed pro builder account program, issuing credit allowances
+                            of up to $50,000 and fleet logistics options.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="milestone-card ms-card-bottom">
+                    <div class="ms-body ms-body-bottom">
+                        <span class="ms-year">2026</span>
+                        <h3 class="ms-title">Digital Hub Release</h3>
+                        <p class="ms-desc">Implemented modern online catalogs, quick-spec modals, and automated
+                            contractor request workflows for global reach.</p>
+                    </div>
+                    <div class="ms-dot ms-dot-active"><span>04</span></div>
+                    <div class="ms-icon-wrap ms-icon-bottom">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Contractor CTA Bar -->
+    <div class="cta-banner">
+        <div class="container cta-banner-content">
+            <div class="cta-banner-text">
+                <h2>Are You a Licensed Contractor or Builder?</h2>
+                <p>Save up to 20% on all orders, apply for credit lines up to $50,000, and get a dedicated store support
+                    manager.</p>
+            </div>
+            <a href="contact.html" class="btn btn-dark">Open Pro Account</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="container footer-grid">
+                <div class="footer-widget">
+                    <a href="index.html" class="footer-logo">
+                        <svg class="footer-logo-svg" viewBox="0 0 24 24">
+                            <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                        </svg>
+                        <span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span>
+                    </a>
+                    <p>Providing robust construction tools, heavy industrial gear, contractor logistics support, and
+                        elite hardware supplies since 2001.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-widget">
+                    <h3>Store Departments</h3>
+                    <ul>
+                        <li><a href="products.html?category=powertools">Power Tools & Drills</a></li>
+                        <li><a href="products.html?category=handtools">Hand Tools & Wrenches</a></li>
+                        <li><a href="products.html?category=paints">Paints & Brush Kits</a></li>
+                        <li><a href="products.html?category=electrical">Electrical Fittings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Our Company</a></li>
+                        <li><a href="services.html">Services Checklist</a></li>
+                        <li><a href="brands.html">Supplier Brands</a></li>
+                        <li><a href="contact.html">Store Location Map</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p class="footer-newsletter">Stay informed on brand tool arrivals, contractor discount coupons &
+                        sales events.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">SUB</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom bg-dark">
+            <div class="container footer-bottom-content">
+                <p>&copy; 2026 Toolix Tools Inc. Developed with Vanilla HTML/CSS. All rights reserved.</p>
+                <div class="footer-payment">
+                    <svg viewBox="0 0 40 25">
+                        <rect width="40" height="25" rx="3" fill="#2d2d2d" /><text x="50%" y="60%" fill="#a0a0a0"
+                            font-size="8" text-anchor="middle">VISA</text>
+                    </svg>
+                    <svg viewBox="0 0 40 25">
+                        <rect width="40" height="25" rx="3" fill="#2d2d2d" /><text x="50%" y="60%" fill="#a0a0a0"
+                            font-size="8" text-anchor="middle">MC</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" aria-label="Scroll back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

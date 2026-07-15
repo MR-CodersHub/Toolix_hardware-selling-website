@@ -1,0 +1,820 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trusted Brands | Toolix Building Supplies</title>
+    <meta name="description"
+        content="View our certified manufacturers including DeWalt, Makita, Bosch, Milwaukee, Titan, and FlowTech. Real guarantee warranties on hardware.">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Apply theme/RTL early to prevent visual flicker
+        if (localStorage.getItem('toolix-theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+        if (localStorage.getItem('toolix-dir') === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        }
+    </script>
+    <style>
+        /* Hero styles migrated to style.css */
+
+        /* ── Brand Stats Strip  ── */
+        .brand-stats-strip {
+            background: var(--bg-light);
+            padding: 30px 0;
+            border-top: 1px solid var(--gray-light);
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .brand-stats-strip .stats-inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+        }
+
+        .brand-stats-strip .stat-item {
+            padding: 10px 20px;
+            border-right: 1px solid var(--gray-light);
+        }
+
+        .brand-stats-strip .stat-item:last-child {
+            border-right: none;
+        }
+
+        .brand-stats-strip .stat-num {
+            font-family: var(--font-primary);
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .brand-stats-strip .stat-label {
+            font-size: 12px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Dark Mode Stats Override */
+        .dark-mode .brand-stats-strip {
+            background: var(--dark-deep) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .dark-mode .brand-stats-strip .stat-item {
+            border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .dark-mode .brand-stats-strip .stat-label {
+            color: #aaa !important;
+        }
+
+        /* ── Brand Cards Redesign ── */
+        .brand-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .brand-card-modern {
+            display: flex;
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-light);
+            height: 260px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .brand-card-modern:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .brand-card-modern.dewalt-accent:hover {
+            border-color: #F4B400;
+        }
+
+        .brand-card-modern.makita-accent:hover {
+            border-color: #00828a;
+        }
+
+        .brand-card-modern.bosch-accent:hover {
+            border-color: #005691;
+        }
+
+        .brand-card-modern.titan-accent:hover {
+            border-color: #e65100;
+        }
+
+        .brand-card-image-wrap {
+            position: relative;
+            width: 42%;
+            min-width: 140px;
+            overflow: hidden;
+        }
+
+        .brand-card-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .brand-card-modern:hover .brand-card-image-wrap img {
+            transform: scale(1.06);
+        }
+
+        .brand-card-image-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+            pointer-events: none;
+        }
+
+        .brand-badge-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            padding: 5px 12px;
+            font-family: var(--font-primary);
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-radius: 3px;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .dewalt-accent .brand-badge-overlay {
+            background: #F4B400;
+            color: #111111;
+        }
+
+        .makita-accent .brand-badge-overlay {
+            background: #00828a;
+        }
+
+        .bosch-accent .brand-badge-overlay {
+            background: #005691;
+        }
+
+        .titan-accent .brand-badge-overlay {
+            background: #e65100;
+        }
+
+        .brand-card-info {
+            width: 58%;
+            padding: 25px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-card-tagline {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--gray);
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+
+        .brand-card-title {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .brand-card-desc {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 18px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            overflow: hidden;
+        }
+
+        .brand-card-btn {
+            font-family: var(--font-primary);
+            font-weight: 800;
+            font-size: 12px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--dark);
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .brand-card-btn .arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .brand-card-btn:hover {
+            color: var(--primary);
+        }
+
+        .brand-card-btn:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* Dark mode overrides */
+        .dark-mode .brand-card-modern {
+            background: #1c1c1b !important;
+            border-color: #2c2c2b !important;
+        }
+
+        .dark-mode .brand-card-title {
+            color: #ffffff !important;
+        }
+
+        .dark-mode .brand-card-btn {
+            color: #ffffff;
+        }
+
+        .dark-mode .brand-card-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Media queries update for split layout */
+        @media (max-width: 768px) {
+            .brand-card-modern {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .brand-card-image-wrap {
+                width: 100%;
+                height: 180px;
+            }
+
+            .brand-card-info {
+                width: 100%;
+                padding: 20px;
+            }
+        }
+
+        /* ── Partner Logo Ticker ── */
+        .logo-ticker-section {
+            background: var(--bg-light);
+            padding: 40px 0;
+            overflow: hidden;
+        }
+
+        .logo-ticker-label {
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-family: var(--font-primary);
+            font-weight: 700;
+        }
+
+        .logo-ticker {
+            display: flex;
+            gap: 60px;
+            animation: ticker 20s linear infinite;
+            width: max-content;
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .logo-ticker-wrap {
+            overflow: hidden;
+        }
+
+        .ticker-brand {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--gray-light);
+            text-transform: uppercase;
+            white-space: nowrap;
+            letter-spacing: 0.04em;
+            transition: color 0.2s;
+        }
+
+        .ticker-brand:hover {
+            color: var(--dark);
+        }
+
+        /* ── Why Partner ── */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .why-card {
+            padding: 35px 28px;
+            border: 1px solid var(--gray-light);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .why-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .why-num {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--gray-light);
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        .why-card h3 {
+            font-family: var(--font-primary);
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 992px) {
+            .brand-cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-stats-strip .stats-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .brand-stats-strip .stat-item:nth-child(2) {
+                border-right: none;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .brands-hero-inner h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brands-hero-inner h1 {
+                font-size: 30px;
+            }
+
+            .brand-stats-strip .stats-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="container topbar-content">
+            <div class="topbar-info">
+                <span>📞 +1-800-AR-TOOLS</span>
+                <span>✉️ contractor-support@toolix.com</span>
+                <span>📍 123 Builders Way, Industrial Zone</span>
+            </div>
+            <div class="topbar-links">
+                <span>⏰ Mon-Sat: 7:00 AM - 7:00 PM</span>
+                <a href="contact.html">Store Locator</a>
+                <a href="services.html#contractor-portal">Contractor Account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-main">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="index.html" class="brand-logo" id="logoLink">
+                    <svg class="brand-icon" viewBox="0 0 24 24">
+                        <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                    </svg>
+                    Toolix
+                </a>
+            </div>
+
+            <!-- Center: Main Navigation Menu -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home2.html">Home 2</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li class="active"><a href="brands.html">Brands</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <button class="header-action-btn" id="themeToggleBtn" title="Toggle Light/Dark Mode">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sun-icon"
+                        style="display:none; width:20px; height:20px;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="moon-icon"
+                        style="width:20px; height:20px;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="header-action-btn" id="rtlToggleBtn" title="Toggle RTL/LTR Direction">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lang-icon"
+                        style="width:20px; height:20px;">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="user-menu-wrapper">
+                    <button class="header-action-btn" id="userAccountBtn" title="User Account">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width:20px; height:20px;">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="login.html" class="dropdown-item">Log In</a>
+                        <a href="signup.html" class="dropdown-item">Sign Up</a>
+                    </div>
+                </div>
+                <a href="cart.html" class="header-action-btn" title="Your Cart">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <span class="cart-count">3</span>
+                </a>
+                <!-- Burger menu link for Mobile screens -->
+                <button class="burger-menu" id="burgerMenuBtn" aria-label="Open navigation menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="brand-logo" style="font-size:22px;"><svg class="brand-icon"
+                    style="width:22px;height:22px;" viewBox="0 0 24 24">
+                    <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                </svg><span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span></a>
+            <button class="mobile-close-btn" id="mobileCloseBtn"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg></button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="home2.html">Home 2</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="brands.html">Brands</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="mobile-auth-section">
+            <a href="login.html" class="mobile-auth-btn mobile-login-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                    <polyline points="10 17 15 12 10 7" />
+                    <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+                Log In
+            </a>
+            <a href="signup.html" class="mobile-auth-btn mobile-signup-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <line x1="20" y1="8" x2="20" y2="14" />
+                    <line x1="23" y1="11" x2="17" y2="11" />
+                </svg>
+                Sign Up
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Header / Subpage Hero -->
+    <section class="subpage-hero brands-hero">
+        <div class="container">
+            <span class="subpage-hero-eyebrow">Authorized Distributor Network</span>
+            <h1 class="subpage-hero-title">Trusted <span>Brand</span> Partners</h1>
+            <p class="subpage-hero-desc">We exclusively stock from world-leading manufacturers — verified, warrantied,
+                and tested to meet commercial contractor grade standards.</p>
+
+            <div class="subpage-hero-breadcrumbs">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Our Brands</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ② STATS STRIP -->
+    <div class="brand-stats-strip">
+        <div class="container">
+            <div class="stats-inner">
+                <div class="stat-item">
+                    <div class="stat-num">500+</div>
+                    <div class="stat-label">Authorized Brands</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">25yr</div>
+                    <div class="stat-label">Distributor Partnerships</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">100%</div>
+                    <div class="stat-label">Genuine Products</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">5yr</div>
+                    <div class="stat-label">Average Warranty</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ③ BRAND VISUAL CARDS GRID -->
+    <section class="section-padding fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Featured Manufacturers</span>
+                <h2 class="section-title">Authorized Brand Portfolios</h2>
+            </div>
+            <div class="brand-cards-grid">
+
+                <!-- DEWALT -->
+                <div class="brand-card-modern dewalt-accent">
+                    <div class="brand-card-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=400&q=80"
+                            alt="DeWalt Power Tools">
+                        <div class="brand-badge-overlay">DeWalt</div>
+                    </div>
+                    <div class="brand-card-info">
+                        <span class="brand-card-tagline">Guaranteed Tough · Since 1923</span>
+                        <h3 class="brand-card-title">DEWALT</h3>
+                        <p class="brand-card-desc">Leading American manufacturer of heavy duty industrial power tools,
+                            hand tools, and contractor layout equipment. Famous signature yellow and black finish —
+                            built to resist the harshest site impacts.</p>
+                        <a href="products.html?brand=dewalt" class="brand-card-btn">Browse Catalog <span
+                                class="arrow">→</span></a>
+                    </div>
+                </div>
+
+                <!-- MAKITA -->
+                <div class="brand-card-modern makita-accent">
+                    <div class="brand-card-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=400&q=80"
+                            alt="Makita Tools">
+                        <div class="brand-badge-overlay">Makita</div>
+                    </div>
+                    <div class="brand-card-info">
+                        <span class="brand-card-tagline">Japanese Precision · Since 1915</span>
+                        <h3 class="brand-card-title">MAKITA</h3>
+                        <p class="brand-card-desc">At the forefront of brushless battery motor engineering. Producing
+                            highly efficient cordless carpentry hammers, angle grinders, and outdoor power gear with LXT
+                            lithium battery systems.</p>
+                        <a href="products.html?brand=makita" class="brand-card-btn">Browse Catalog <span
+                                class="arrow">→</span></a>
+                    </div>
+                </div>
+
+                <!-- BOSCH -->
+                <div class="brand-card-modern bosch-accent">
+                    <div class="brand-card-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1581783898377-1c85bf937427?auto=format&fit=crop&w=400&q=80"
+                            alt="Bosch Engineering">
+                        <div class="brand-badge-overlay">Bosch</div>
+                    </div>
+                    <div class="brand-card-info">
+                        <span class="brand-card-tagline">Invented for Life · Since 1886</span>
+                        <h3 class="brand-card-title">BOSCH</h3>
+                        <p class="brand-card-desc">Outstanding engineering devices, high precision measuring lasers,
+                            heavy hammer drills, and router sets. Unmatched German engineering standards providing
+                            security and accuracy.</p>
+                        <a href="products.html?brand=bosch" class="brand-card-btn">Browse Catalog <span
+                                class="arrow">→</span></a>
+                    </div>
+                </div>
+
+                <!-- TITAN -->
+                <div class="brand-card-modern titan-accent">
+                    <div class="brand-card-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=400&q=80"
+                            alt="Titan Coatings">
+                        <div class="brand-badge-overlay">Titan</div>
+                    </div>
+                    <div class="brand-card-info">
+                        <span class="brand-card-tagline">Leader in Paint Application</span>
+                        <h3 class="brand-card-title">TITAN</h3>
+                        <p class="brand-card-desc">Paints, spray tips, and weather protection latex fluids engineered
+                            for maximum coverage and longevity. Perfect for exterior sidings, concrete block paint
+                            schemes, and structural rust prevention.</p>
+                        <a href="products.html?brand=titan" class="brand-card-btn">Browse Catalog <span
+                                class="arrow">→</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ④ SCROLLING LOGO TICKER -->
+    <div class="logo-ticker-section">
+        <p class="logo-ticker-label">More Stocked Brands</p>
+        <div class="logo-ticker-wrap">
+            <div class="logo-ticker">
+                <span class="ticker-brand">DEWALT</span><span class="ticker-brand">MAKITA</span>
+                <span class="ticker-brand">BOSCH</span><span class="ticker-brand">MILWAUKEE</span>
+                <span class="ticker-brand">TITAN</span><span class="ticker-brand">RIDGID</span>
+                <span class="ticker-brand">STANLEY</span><span class="ticker-brand">FLUKE</span>
+                <span class="ticker-brand">RYOBI</span><span class="ticker-brand">HILTI</span>
+                <!-- duplicate for seamless loop -->
+                <span class="ticker-brand">DEWALT</span><span class="ticker-brand">MAKITA</span>
+                <span class="ticker-brand">BOSCH</span><span class="ticker-brand">MILWAUKEE</span>
+                <span class="ticker-brand">TITAN</span><span class="ticker-brand">RIDGID</span>
+                <span class="ticker-brand">STANLEY</span><span class="ticker-brand">FLUKE</span>
+                <span class="ticker-brand">RYOBI</span><span class="ticker-brand">HILTI</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ⑤ WHY WE PARTNER -->
+    <section class="section-padding bg-beige fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Our Standard</span>
+                <h2 class="section-title">Why These Brands?</h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-num">01</div>
+                    <h3>Authorized Distributor</h3>
+                    <p>Every brand on our shelves carries a signed distributor agreement ensuring full manufacturer
+                        warranty coverage on all purchases — no grey market products.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-num">02</div>
+                    <h3>Rigorous Quality Testing</h3>
+                    <p>Our in-house quality team physically tests random samples from each incoming shipment against
+                        manufacturer spec sheets before stocking begins.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-num">03</div>
+                    <h3>Contractor Proven</h3>
+                    <p>Every brand stockeed has been vetted through 50+ active commercial construction projects with
+                        documented performance data and contractor feedback ratings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Bar -->
+    <div class="cta-banner">
+        <div class="container cta-banner-content">
+            <div class="cta-banner-text">
+                <h2>Are You a Licensed Contractor or Builder?</h2>
+                <p>Save up to 20% on all orders, apply for credit lines up to $50,000, and get a dedicated store support
+                    manager.</p>
+            </div>
+            <a href="contact.html" class="btn btn-dark">Open Pro Account</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="container footer-grid">
+                <div class="footer-widget">
+                    <a href="index.html" class="footer-logo"><svg class="footer-logo-svg" viewBox="0 0 24 24">
+                            <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                        </svg><span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span></a>
+                    <p>Providing robust construction tools, heavy industrial gear, contractor logistics support, and
+                        elite hardware supplies since 2001.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-widget">
+                    <h3>Store Departments</h3>
+                    <ul>
+                        <li><a href="products.html?category=powertools">Power Tools & Drills</a></li>
+                        <li><a href="products.html?category=handtools">Hand Tools & Wrenches</a></li>
+                        <li><a href="products.html?category=paints">Paints & Brush Kits</a></li>
+                        <li><a href="products.html?category=electrical">Electrical Fittings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Our Company</a></li>
+                        <li><a href="services.html">Services Checklist</a></li>
+                        <li><a href="brands.html">Supplier Brands</a></li>
+                        <li><a href="contact.html">Store Location Map</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h3>Newsletter</h3>
+                    <p class="footer-newsletter">Stay informed on brand tool arrivals, contractor discount coupons &
+                        sales events.</p>
+                    <form class="newsletter-form"><input type="email" placeholder="Enter your email" required><button
+                            type="submit">SUB</button></form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom bg-dark">
+            <div class="container footer-bottom-content">
+                <p>&copy; 2026 Toolix Tools Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" aria-label="Scroll back to top"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg></button>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

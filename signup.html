@@ -1,0 +1,644 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Toolix Tools & Hardware</title>
+    <meta name="description"
+        content="Register a Toolix account to leverage member discounts, track building supplies tracking, and register contractor credit accounts.">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Apply theme/RTL early to prevent visual flicker
+        if (localStorage.getItem('toolix-theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+        if (localStorage.getItem('toolix-dir') === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        }
+    </script>
+    <style>
+        /* ── Simplified Layout Styles ── */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: var(--bg-light);
+            color: var(--dark);
+            transition: background 0.3s ease, color 0.3s ease;
+            font-family: var(--font-secondary);
+            margin: 0;
+            padding: 0;
+        }
+
+        .simplified-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: var(--light);
+            border-bottom: 1px solid var(--gray-border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .dark-mode .simplified-header {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            background-color: var(--light);
+        }
+
+        .simplified-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .simplified-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--dark) !important;
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .simplified-brand svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .simplified-brand:hover svg {
+            transform: scale(1.05);
+        }
+
+        .simplified-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .simplified-btn {
+            background: rgba(0, 0, 0, 0.03) !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: #1F1F1F !important;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .simplified-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #1F1F1F !important;
+            fill: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .simplified-btn:hover {
+            border-color: var(--primary) !important;
+            background: rgba(244, 180, 0, 0.08) !important;
+            transform: translateY(-2px);
+        }
+
+        .simplified-btn:hover svg {
+            stroke: var(--primary) !important;
+        }
+
+        #themeToggleBtn:hover svg {
+            transform: rotate(45deg) scale(1.1);
+        }
+
+        #rtlToggleBtn:hover svg {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        /* Responsive Dark Mode overrides for togglers and header elements */
+        .dark-mode .simplified-btn {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            color: #FFFFFF !important;
+        }
+
+        .dark-mode .simplified-btn svg {
+            stroke: #FFFFFF !important;
+        }
+
+        .dark-mode .simplified-btn:hover {
+            background: rgba(244, 180, 0, 0.18) !important;
+            border-color: var(--primary) !important;
+        }
+
+        .dark-mode .simplified-brand {
+            color: #FFFFFF !important;
+        }
+
+        /* ── Centering elements & Page Content ── */
+        .auth-section {
+            padding: 100px 20px 40px;
+            /* high top padding to clear fixed header */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .auth-container {
+            max-width: 520px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .auth-card {
+            background: var(--light);
+            border: 1px solid var(--gray-border);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: cardAppear 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Glowing top border indicator for elite coding design */
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+        }
+
+        .dark-mode .auth-card {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .auth-header h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--dark) !important;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .auth-header p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Tabs for Account Type Selection */
+        .auth-tabs {
+            display: flex;
+            background: var(--gray-light);
+            padding: 4px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid var(--gray-border);
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: all 0.2s ease;
+        }
+
+        .auth-tab.active {
+            background: var(--light);
+            color: var(--dark);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .auth-form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .auth-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--dark);
+        }
+
+        .input-icon-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon-wrap svg {
+            position: absolute;
+            left: 16px;
+            width: 18px;
+            height: 18px;
+            color: var(--gray);
+            transition: color 0.3s ease;
+            pointer-events: none;
+        }
+
+        [dir="rtl"] .input-icon-wrap svg {
+            left: auto;
+            right: 16px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 14px 16px 14px 46px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-border);
+            font-family: var(--font-secondary);
+            font-size: 14px;
+            background: var(--light);
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .auth-input::placeholder {
+            color: var(--gray);
+            opacity: 0.6;
+        }
+
+        [dir="rtl"] .auth-input {
+            padding: 14px 46px 14px 16px;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(244, 180, 0, 0.15);
+        }
+
+        .auth-input:focus+svg {
+            color: var(--primary);
+        }
+
+        .auth-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 13px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            cursor: pointer;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+
+        .remember-me input {
+            cursor: pointer;
+            accent-color: var(--primary);
+            width: 16px;
+            height: 16px;
+            margin-top: 2px;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 8px !important;
+            font-size: 14px !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            background: var(--primary);
+            color: var(--dark-deep) !important;
+            box-shadow: 0 4px 12px rgba(244, 180, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .auth-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(244, 180, 0, 0.35);
+        }
+
+        .auth-footer-note {
+            text-align: center;
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 25px;
+        }
+
+        .auth-footer-note a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.2s ease;
+        }
+
+        .auth-footer-note a:hover {
+            color: var(--primary);
+        }
+
+        .form-feedback-auth {
+            margin-top: 15px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .form-feedback-auth.success {
+            background: rgba(76, 175, 80, 0.12);
+            color: #4CAF50;
+            display: block;
+        }
+
+        .form-feedback-auth.error {
+            background: rgba(229, 57, 53, 0.12);
+            color: #E53935;
+            display: block;
+        }
+
+        .form-feedback-auth.loading {
+            background: rgba(244, 180, 0, 0.12);
+            color: #F4B400;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simplified Fixed Header -->
+    <header class="simplified-header">
+        <div class="container">
+            <!-- Left: Logo & Brand Name -->
+            <a href="index.html" class="simplified-brand" id="logoLink">
+                <svg class="brand-icon" viewBox="0 0 24 24">
+                    <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                </svg>
+                Toolix
+            </a>
+
+            <!-- Right: Theme and RTL togglers -->
+            <div class="simplified-actions">
+                <button class="simplified-btn" id="themeToggleBtn" title="Toggle Light/Dark Mode">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sun-icon"
+                        style="display:none;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="moon-icon">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="simplified-btn" id="rtlToggleBtn" title="Toggle RTL/LTR Direction">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lang-icon">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Auth Form Shell -->
+    <main class="auth-section">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2 id="authTitle">Create Account</h2>
+                    <p id="authSubtitle">Join Toolix to unlock membership discounts.</p>
+                </div>
+
+                <!-- Personal / Contractor Tabs -->
+                <div class="auth-tabs">
+                    <div class="auth-tab active" id="tabPersonal">Personal Account</div>
+                    <div class="auth-tab" id="tabContractor">Contractor Pro</div>
+                </div>
+
+                <form id="signupMainForm">
+                    <div class="auth-form-group">
+                        <label for="signupName" id="nameLabel">Full Name</label>
+                        <div class="input-icon-wrap">
+                            <input type="text" id="signupName" class="auth-input" placeholder="John Doe" required>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="auth-form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <div class="input-icon-wrap">
+                            <input type="email" id="signupEmail" class="auth-input" placeholder="name@domain.com"
+                                required>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="auth-form-group" id="licenseGroup" style="display: none;">
+                        <label for="signupLicense">Contractor License #</label>
+                        <div class="input-icon-wrap">
+                            <input type="text" id="signupLicense" class="auth-input" placeholder="e.g. LIC-998822-PRO">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="auth-form-group">
+                        <label for="signupPassword">Password</label>
+                        <div class="input-icon-wrap">
+                            <input type="password" id="signupPassword" class="auth-input"
+                                placeholder="Min. 8 characters" required>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="auth-form-group">
+                        <label for="signupConfirmPassword">Confirm Password</label>
+                        <div class="input-icon-wrap">
+                            <input type="password" id="signupConfirmPassword" class="auth-input"
+                                placeholder="Confirm your password" required>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="auth-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="termsCheck" required>
+                            <span>I agree to Toolix <a href="#" style="color: inherit; font-weight:700;">Terms of
+                                    Services</a> and privacy rules.</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary auth-btn">Register Account</button>
+
+                    <div id="signupFeedback" class="form-feedback-auth"></div>
+                </form>
+
+                <div class="auth-footer-note">
+                    Already registered? <a href="login.html">Log In Here</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const personalTab = document.getElementById('tabPersonal');
+            const contractorTab = document.getElementById('tabContractor');
+            const authTitle = document.getElementById('authTitle');
+            const authSubtitle = document.getElementById('authSubtitle');
+            const nameLabel = document.getElementById('nameLabel');
+            const licenseGroup = document.getElementById('licenseGroup');
+            const licenseInput = document.getElementById('signupLicense');
+
+            let activeTab = 'personal';
+
+            personalTab.addEventListener('click', () => {
+                personalTab.classList.add('active');
+                contractorTab.classList.remove('active');
+                activeTab = 'personal';
+                authTitle.textContent = 'Create Account';
+                authSubtitle.textContent = 'Join Toolix to unlock membership discounts.';
+                nameLabel.textContent = 'Full Name';
+                licenseGroup.style.display = 'none';
+                licenseInput.removeAttribute('required');
+            });
+
+            contractorTab.addEventListener('click', () => {
+                contractorTab.classList.add('active');
+                personalTab.classList.remove('active');
+                activeTab = 'contractor';
+                authTitle.textContent = 'Register Pro Contractor';
+                authSubtitle.textContent = 'Register commercial logs, tax exemptions & credit metrics.';
+                nameLabel.textContent = 'Company Name / Principal';
+                licenseGroup.style.display = 'block';
+                licenseInput.setAttribute('required', 'true');
+            });
+
+            // Form Submit Logic
+            const form = document.getElementById('signupMainForm');
+            const feedback = document.getElementById('signupFeedback');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                feedback.className = 'form-feedback-auth loading';
+                feedback.textContent = 'Generating credentials & registration key...';
+
+                const password = document.getElementById('signupPassword').value;
+                const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+                if (password !== confirmPassword) {
+                    setTimeout(() => {
+                        feedback.className = 'form-feedback-auth error';
+                        feedback.textContent = '❌ Passwords do not match. Please verify.';
+                    }, 800);
+                    return;
+                }
+
+                if (password.length < 8) {
+                    setTimeout(() => {
+                        feedback.className = 'form-feedback-auth error';
+                        feedback.textContent = '❌ Password must be at least 8 characters long.';
+                    }, 800);
+                    return;
+                }
+
+                setTimeout(() => {
+                    feedback.className = 'form-feedback-auth success';
+                    feedback.innerHTML = `🏁 <strong>Account Created!</strong> Welcome to Toolix Tools network. Redirection...`;
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1200);
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+
+</html>

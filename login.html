@@ -1,0 +1,701 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Login | Toolix Tools & Hardware</title>
+    <meta name="description"
+        content="Access your Toolix Contractor account, order history, contractor logs, tracking metrics, and pro-builder bulk pricing.">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Apply theme/RTL early to prevent visual flicker
+        if (localStorage.getItem('toolix-theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+        if (localStorage.getItem('toolix-dir') === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        }
+    </script>
+    <style>
+        /* ── Simplified Layout Styles ── */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: var(--bg-light);
+            color: var(--dark);
+            transition: background 0.3s ease, color 0.3s ease;
+            font-family: var(--font-secondary);
+            margin: 0;
+            padding: 0;
+        }
+
+        .simplified-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: var(--light);
+            border-bottom: 1px solid var(--gray-border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .dark-mode .simplified-header {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            background-color: var(--light);
+            /* Uses dark color variables in dark mode */
+        }
+
+        .simplified-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .simplified-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--dark) !important;
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .simplified-brand svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .simplified-brand:hover svg {
+            transform: scale(1.05);
+        }
+
+        .simplified-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .simplified-btn {
+            background: rgba(0, 0, 0, 0.03) !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: #1F1F1F !important;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .simplified-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #1F1F1F !important;
+            fill: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .simplified-btn:hover {
+            border-color: var(--primary) !important;
+            background: rgba(244, 180, 0, 0.08) !important;
+            transform: translateY(-2px);
+        }
+
+        .simplified-btn:hover svg {
+            stroke: var(--primary) !important;
+        }
+
+        #themeToggleBtn:hover svg {
+            transform: rotate(45deg) scale(1.1);
+        }
+
+        #rtlToggleBtn:hover svg {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        /* Responsive Dark Mode overrides for togglers and header elements */
+        .dark-mode .simplified-btn {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            color: #FFFFFF !important;
+        }
+
+        .dark-mode .simplified-btn svg {
+            stroke: #FFFFFF !important;
+        }
+
+        .dark-mode .simplified-btn:hover {
+            background: rgba(244, 180, 0, 0.18) !important;
+            border-color: var(--primary) !important;
+        }
+
+        .dark-mode .simplified-brand {
+            color: #FFFFFF !important;
+        }
+
+        /* ── Centering elements & Page Content ── */
+        .auth-section {
+            padding: 100px 20px 40px;
+            /* high top padding to clear fixed header */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .auth-container {
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .auth-card {
+            background: var(--light);
+            border: 1px solid var(--gray-border);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: cardAppear 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Glowing top border indicator for elite coding design */
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+        }
+
+        .dark-mode .auth-card {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .auth-header h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--dark) !important;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .auth-header p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Tabs for Account Type Selection */
+        .auth-tabs {
+            display: flex;
+            background: var(--gray-light);
+            padding: 4px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid var(--gray-border);
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: all 0.2s ease;
+        }
+
+        .auth-tab.active {
+            background: var(--light);
+            color: var(--dark);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .auth-form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .auth-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--dark);
+        }
+
+        .input-icon-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon-wrap svg {
+            position: absolute;
+            left: 16px;
+            width: 18px;
+            height: 18px;
+            color: var(--gray);
+            transition: color 0.3s ease;
+            pointer-events: none;
+        }
+
+        [dir="rtl"] .input-icon-wrap svg {
+            left: auto;
+            right: 16px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 14px 16px 14px 46px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-border);
+            font-family: var(--font-secondary);
+            font-size: 14px;
+            background: var(--light);
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .auth-input::placeholder {
+            color: var(--gray);
+            opacity: 0.6;
+        }
+
+        [dir="rtl"] .auth-input {
+            padding: 14px 46px 14px 16px;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(244, 180, 0, 0.15);
+        }
+
+        .auth-input:focus+svg {
+            color: var(--primary);
+        }
+
+        .auth-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 13px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .remember-me input {
+            cursor: pointer;
+            accent-color: var(--primary);
+            width: 16px;
+            height: 16px;
+        }
+
+        .forgot-pass {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .forgot-pass:hover {
+            color: var(--primary);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 8px !important;
+            font-size: 14px !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            background: var(--primary);
+            color: var(--dark-deep) !important;
+            box-shadow: 0 4px 12px rgba(244, 180, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .auth-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(244, 180, 0, 0.35);
+        }
+
+        .social-login-separator {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .social-login-separator::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gray-border);
+            z-index: 1;
+        }
+
+        .social-login-separator span {
+            background: var(--light);
+            padding: 0 15px;
+            font-size: 12px;
+            color: var(--gray);
+            font-weight: 600;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .social-btn-auth {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 8px;
+            background: var(--light);
+            border: 1px solid var(--gray-border);
+            cursor: pointer;
+            font-family: var(--font-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .social-btn-auth:hover {
+            border-color: var(--primary);
+            background: rgba(244, 180, 0, 0.05);
+        }
+
+        .social-btn-auth svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .auth-footer-note {
+            text-align: center;
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .auth-footer-note a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.2s ease;
+        }
+
+        .auth-footer-note a:hover {
+            color: var(--primary);
+        }
+
+        .form-feedback-auth {
+            margin-top: 15px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .form-feedback-auth.success {
+            background: rgba(76, 175, 80, 0.12);
+            color: #4CAF50;
+            display: block;
+        }
+
+        .form-feedback-auth.error {
+            background: rgba(229, 57, 53, 0.12);
+            color: #E53935;
+            display: block;
+        }
+
+        .form-feedback-auth.loading {
+            background: rgba(244, 180, 0, 0.12);
+            color: #F4B400;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simplified Fixed Header -->
+    <header class="simplified-header">
+        <div class="container">
+            <!-- Left: Logo & Brand Name -->
+            <a href="index.html" class="simplified-brand" id="logoLink">
+                <svg class="brand-icon" viewBox="0 0 24 24">
+                    <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                </svg>
+                Toolix
+            </a>
+
+            <!-- Right: Theme and RTL togglers -->
+            <div class="simplified-actions">
+                <button class="simplified-btn" id="themeToggleBtn" title="Toggle Light/Dark Mode">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sun-icon"
+                        style="display:none;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="moon-icon">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="simplified-btn" id="rtlToggleBtn" title="Toggle RTL/LTR Direction">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lang-icon">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Auth Form Shell -->
+    <main class="auth-section">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2 id="authTitle">Welcome Back</h2>
+                    <p id="authSubtitle">Please enter your builder credentials to proceed.</p>
+                </div>
+
+                <!-- Personal / Contractor Tabs -->
+                <div class="auth-tabs">
+                    <div class="auth-tab active" id="tabPersonal">Personal</div>
+                    <div class="auth-tab" id="tabContractor">Contractor Pro</div>
+                </div>
+
+                <form id="loginMainForm">
+                    <div class="auth-form-group">
+                        <label for="loginEmail" id="emailLabel">Email Address / User ID</label>
+                        <div class="input-icon-wrap">
+                            <input type="text" id="loginEmail" class="auth-input" placeholder="name@domain.com"
+                                required>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="auth-form-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="input-icon-wrap">
+                            <input type="password" id="loginPassword" class="auth-input" placeholder="••••••••"
+                                required>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="auth-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-pass" id="forgotPassLink">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary auth-btn">Authorize Log In</button>
+
+                    <div id="loginFeedback" class="form-feedback-auth"></div>
+                </form>
+
+                <div class="social-login-separator">
+                    <span>Or Connect With</span>
+                </div>
+
+                <div class="social-buttons">
+                    <button class="social-btn-auth" id="btnGoogleAuth">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12.24 10.285V13.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.866-3.577-7.866-8s3.536-8 7.866-8c2.46 0 4.105 1.025 5.047 1.926l2.427-2.334C17.955 2.192 15.34 1 12.24 1 6.033 1 1 6.033 1 12.24s5.033 11.24 11.24 11.24c6.478 0 10.793-4.537 10.793-10.986 0-.74-.08-1.3-.178-1.78l-10.615-.43z" />
+                        </svg>
+                        Google
+                    </button>
+                    <button class="social-btn-auth" id="btnContractorAuth">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                            <polyline points="2 17 12 22 22 17" />
+                            <polyline points="2 12 12 17 22 12" />
+                        </svg>
+                        Pro Hub
+                    </button>
+                </div>
+
+                <div class="auth-footer-note">
+                    New to Toolix Tools? <a href="signup.html">Create An Account</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const personalTab = document.getElementById('tabPersonal');
+            const contractorTab = document.getElementById('tabContractor');
+            const authTitle = document.getElementById('authTitle');
+            const authSubtitle = document.getElementById('authSubtitle');
+            const emailInput = document.getElementById('loginEmail');
+            const emailLabel = document.getElementById('emailLabel');
+
+            let activeTab = 'personal';
+
+            personalTab.addEventListener('click', () => {
+                personalTab.classList.add('active');
+                contractorTab.classList.remove('active');
+                activeTab = 'personal';
+                authTitle.textContent = 'Welcome Back';
+                authSubtitle.textContent = 'Please enter your builder credentials to proceed.';
+                emailLabel.textContent = 'Email Address / User ID';
+                emailInput.placeholder = 'name@domain.com';
+                emailInput.type = 'email';
+            });
+
+            contractorTab.addEventListener('click', () => {
+                contractorTab.classList.add('active');
+                personalTab.classList.remove('active');
+                activeTab = 'contractor';
+                authTitle.textContent = 'Pro Contractor Login';
+                authSubtitle.textContent = 'Gain access to bulk pricing indices and project credit metrics.';
+                emailLabel.textContent = 'Contractor License / ID';
+                emailInput.placeholder = 'e.g. LIC-998822-PRO';
+                emailInput.type = 'text';
+            });
+
+            // Form Submit Logic
+            const form = document.getElementById('loginMainForm');
+            const feedback = document.getElementById('loginFeedback');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                feedback.className = 'form-feedback-auth loading';
+                feedback.textContent = 'Authenticating credentials secure pipeline...';
+
+                setTimeout(() => {
+                    const email = emailInput.value.trim();
+                    feedback.className = 'form-feedback-auth success';
+                    feedback.innerHTML = `🏁 <strong>Login Authorized!</strong> Secure redirection in progress. Welcome back ${email.substring(0, 15)}...`;
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1200);
+                }, 1500);
+            });
+
+            // social logins mock alerts
+            document.getElementById('btnGoogleAuth').addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Contacting Google SSO authentication channel... Complete login on popup window.');
+            });
+            document.getElementById('btnContractorAuth').addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Connecting to Contractor Pro Hub vault... Loading smart credentials.');
+            });
+
+            document.getElementById('forgotPassLink').addEventListener('click', (e) => {
+                e.preventDefault();
+                const userVal = emailInput.value.trim();
+                if (!userVal) {
+                    alert('Please enter your email or ID in the input box first so we can transmit secure reset guidelines.');
+                } else {
+                    alert(`Secure access recovery link transmitted successfully to registered contact points of: ${userVal}`);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

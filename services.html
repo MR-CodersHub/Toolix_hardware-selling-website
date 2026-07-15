@@ -1,0 +1,1043 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Toolix Contractor Logistics</title>
+    <meta name="description"
+        content="Discover professional services at Toolix including computerized paint mixing, bulk raw supply delivery, day-rate tools rental, and engineering consulting.">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Apply theme/RTL early to prevent visual flicker
+        if (localStorage.getItem('toolix-theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+        if (localStorage.getItem('toolix-dir') === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="container topbar-content">
+            <div class="topbar-info">
+                <span>📞 +1-800-AR-TOOLS (800-278-6657)</span>
+                <span>✉️ contractor-support@toolix.com</span>
+                <span>📍 123 Builders Way, Industrial Zone</span>
+            </div>
+            <div class="topbar-links">
+                <span>⏰ Mon-Sat: 7:00 AM - 7:00 PM</span>
+                <a href="contact.html">Store Locator</a>
+                <a href="services.html#contractor-portal">Contractor Account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-main">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="index.html" class="brand-logo" id="logoLink">
+                    <svg class="brand-icon" viewBox="0 0 24 24">
+                        <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                    </svg>
+                    <span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span>
+                </a>
+            </div>
+
+            <!-- Center: Main Navigation Menu -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home2.html">Home 2</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="brands.html">Brands</a></li>
+                    <li class="active"><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <button class="header-action-btn" id="themeToggleBtn" title="Toggle Light/Dark Mode">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sun-icon"
+                        style="display:none; width:20px; height:20px;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="moon-icon"
+                        style="width:20px; height:20px;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="header-action-btn" id="rtlToggleBtn" title="Toggle RTL/LTR Direction">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lang-icon"
+                        style="width:20px; height:20px;">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="user-menu-wrapper">
+                    <button class="header-action-btn" id="userAccountBtn" title="User Account">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width:20px; height:20px;">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="login.html" class="dropdown-item">Log In</a>
+                        <a href="signup.html" class="dropdown-item">Sign Up</a>
+                    </div>
+                </div>
+                <a href="cart.html" class="header-action-btn" title="Your Cart">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <span class="cart-count">3</span>
+                </a>
+                <!-- Burger menu link for Mobile screens -->
+                <button class="burger-menu" id="burgerMenuBtn" aria-label="Open navigation menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Sidebar Drawer -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="brand-logo" style="font-size: 22px;">
+                <svg class="brand-icon" style="width: 22px; height: 22px;" viewBox="0 0 24 24">
+                    <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                </svg>
+                <span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span>
+            </a>
+            <button class="mobile-close-btn" id="mobileCloseBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="home2.html">Home 2</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="brands.html">Brands</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="mobile-auth-section">
+            <a href="login.html" class="mobile-auth-btn mobile-login-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                    <polyline points="10 17 15 12 10 7" />
+                    <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+                Log In
+            </a>
+            <a href="signup.html" class="mobile-auth-btn mobile-signup-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <line x1="20" y1="8" x2="20" y2="14" />
+                    <line x1="23" y1="11" x2="17" y2="11" />
+                </svg>
+                Sign Up
+            </a>
+        </div>
+    </div>
+
+    <style>
+        /* Services hero styles migrated to style.css */
+
+        .services-badges {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .s-badge {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .15);
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 12px;
+            color: #ddd;
+            font-family: var(--font-primary);
+            font-weight: 600
+        }
+
+        .s-badge em {
+            color: var(--primary);
+            font-style: normal;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .s-badge em svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--primary);
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .s-badge:hover em svg {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        .services-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-photo-card {
+            background: var(--light);
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: default;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            height: auto;
+        }
+
+        .service-photo-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .service-card-img-wrap {
+            position: relative;
+            height: 180px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .service-card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-photo-card:hover .service-card-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .service-photo-card::after {
+            content: none !important;
+        }
+
+        .spc-icon {
+            position: absolute;
+            top: 155px;
+            /* overlay image bottom */
+            right: 25px;
+            z-index: 3;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        [dir="rtl"] .spc-icon {
+            right: auto;
+            left: 25px;
+        }
+
+        .service-photo-card:hover .spc-icon {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .spc-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--dark-deep) !important;
+            fill: none;
+        }
+
+        .spc-body {
+            position: static;
+            padding: 30px 25px 25px 25px;
+            background: var(--light);
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .spc-body h3 {
+            font-family: var(--font-primary);
+            font-size: 18px;
+            text-transform: uppercase;
+            color: var(--dark) !important;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+        }
+
+        .spc-body p {
+            font-size: 13px;
+            color: var(--gray) !important;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .spc-body a {
+            font-family: var(--font-primary);
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+
+        .spc-body a:hover {
+            color: var(--primary-hover);
+            text-decoration: none;
+        }
+
+        /* Dark Mode overrides */
+        .dark-mode .service-photo-card {
+            background-color: #1a1a19 !important;
+            border-color: #2c2c2b !important;
+        }
+
+        .dark-mode .spc-body {
+            background-color: #1a1a19 !important;
+        }
+
+        .dark-mode .spc-body h3 {
+            color: #ffffff !important;
+        }
+
+        .dark-mode .spc-body p {
+            color: #b0aba0 !important;
+        }
+
+        /* Process grid and steps */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            align-items: start;
+            margin-top: 40px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 30px 20px;
+            border-right: 1px solid var(--gray-light);
+            position: relative;
+        }
+
+        .process-step:last-child {
+            border-right: none;
+        }
+
+        .process-step-num {
+            width: 52px;
+            height: 52px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: var(--font-primary);
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--dark);
+        }
+
+        .process-step h4 {
+            font-family: var(--font-primary);
+            text-transform: uppercase;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .dark-mode .process-step {
+            border-right-color: rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                border-right: none;
+                border-bottom: 1px solid var(--gray-light);
+                padding: 25px 10px;
+            }
+
+            .process-step:last-child {
+                border-bottom: none;
+            }
+
+            .dark-mode .process-step {
+                border-bottom-color: rgba(255, 255, 255, 0.08);
+            }
+        }
+
+        @media(max-width:992px) {
+            .services-photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .srv-hero-inner h1 {
+                font-size: 38px;
+            }
+        }
+
+        @media(max-width:576px) {
+            .services-photo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .srv-hero-inner h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+
+    <!-- Page Header / Subpage Hero -->
+    <section class="subpage-hero services-hero">
+        <div class="container">
+            <span class="subpage-hero-eyebrow">Toolix Professional Services</span>
+            <h1 class="subpage-hero-title">Every <span>Service</span> Builders Need</h1>
+            <p class="subpage-hero-desc">From bulk raw materials to paint mixing, machinery rentals, and engineer
+                consultations — complete trade support on-site.</p>
+
+            <div class="services-badges">
+                <div class="s-badge">
+                    <em>
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13" rx="2" ry="2"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>
+                    </em>
+                    2-Hour Site Delivery
+                </div>
+                <div class="s-badge">
+                    <em>
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12 22C17.5228 22 22 17.5228 22 12C22 9.5 20.5 7.5 18 7.5H16.5C15.6716 7.5 15 6.82843 15 6V4.5C15 2 13 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z">
+                            </path>
+                            <circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"></circle>
+                            <circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"></circle>
+                            <circle cx="16.5" cy="11.5" r="1.5" fill="currentColor"></circle>
+                        </svg>
+                    </em>
+                    Spectro Paint Matching
+                </div>
+                <div class="s-badge">
+                    <em>
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                            </path>
+                        </svg>
+                    </em>
+                    Tool Rental Fleet
+                </div>
+            </div>
+            <div class="subpage-hero-breadcrumbs">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Services</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ② PHOTO-BACKED SERVICE CARDS -->
+    <section class="section-padding fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Complete Trade Support</span>
+                <h2 class="section-title">Our Professional Services</h2>
+            </div>
+
+            <div class="services-photo-grid" id="contractor-portal">
+
+                <div class="service-photo-card">
+                    <div class="service-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=700&q=80"
+                            alt="Bulk Raw Supply" loading="lazy">
+                    </div>
+                    <div class="spc-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+                        </svg></div>
+                    <div class="spc-body">
+                        <h3>Bulk Materials Supply</h3>
+                        <p>Over 20 tons of timber, concrete sacks, copper piping, and drywall sheeting from our dispatch
+                            warehouse.</p>
+                        <a href="contact.html?inquiry=bulk">Request a Quote &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="service-photo-card">
+                    <div class="service-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?auto=format&fit=crop&w=700&q=80"
+                            alt="Contractor Support" loading="lazy">
+                    </div>
+                    <div class="spc-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg></div>
+                    <div class="spc-body">
+                        <h3>Contractor Account</h3>
+                        <p>30-day interest-free credit, itemized invoices, and dedicated dispatch lines for licensed
+                            commercial firms.</p>
+                        <a href="contact.html?inquiry=contractor">Apply for Account &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="service-photo-card">
+                    <div class="service-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=700&q=80"
+                            alt="Paint Mixing" loading="lazy">
+                    </div>
+                    <div class="spc-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path
+                                d="M12 22a7 7 0 0 0 7-7c0-2.31-1.02-4.14-2.58-5.32L12 2l-4.42 7.68A7.03 7.03 0 0 0 5 15a7 7 0 0 0 7 7z" />
+                        </svg></div>
+                    <div class="spc-body">
+                        <h3>Computer Paint Mixing</h3>
+                        <p>Spectrophotometer scanner matches pigment codes to 0.05mg accuracy &mdash; custom colors in
+                            under 5 minutes.</p>
+                        <a href="contact.html?inquiry=paint">Book Color Match &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="service-photo-card">
+                    <div class="service-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1581783898377-1c85bf937427?auto=format&fit=crop&w=700&q=80"
+                            alt="Tool Rental" loading="lazy">
+                    </div>
+                    <div class="spc-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path
+                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                        </svg></div>
+                    <div class="spc-body">
+                        <h3>Machinery &amp; Tool Rentals</h3>
+                        <p>Excavating machines, nailers, pressure washers, and scaffold structures at competitive daily
+                            rates.</p>
+                        <a href="contact.html?inquiry=rental">View Rental Rates &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="service-photo-card">
+                    <div class="service-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=700&q=80"
+                            alt="Express Delivery" loading="lazy">
+                    </div>
+                    <div class="spc-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="1" y="3" width="15" height="13" rx="2" ry="2" />
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                            <circle cx="5.5" cy="18.5" r="2.5" />
+                            <circle cx="18.5" cy="18.5" r="2.5" />
+                        </svg></div>
+                    <div class="spc-body">
+                        <h3>2-Hour Site Delivery</h3>
+                        <p>Flatbed crane transport dispatches bulk timber, bricks and tiles directly to your
+                            construction site.</p>
+                        <a href="contact.html?inquiry=delivery">Check Your ZIP &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="service-photo-card">
+                    <div class="service-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80"
+                            alt="Technical Consultation" loading="lazy">
+                    </div>
+                    <div class="spc-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg></div>
+                    <div class="spc-body">
+                        <h3>Engineer Consultation</h3>
+                        <p>Advice on load ratios, insulation compliance, and structural rustproofing from licensed
+                            engineers.</p>
+                        <a href="contact.html?inquiry=tech">Book Your Advisor &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: How It Works – Process Steps -->
+    <section class="section-padding bg-beige fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Simple Steps</span>
+                <h2 class="section-title">How Our Services Work</h2>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="process-step-num">1</div>
+                    <h4>Submit Request</h4>
+                    <p>Call us or submit an inquiry form detailing your material type, quantity, and delivery ZIP code.
+                    </p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">2</div>
+                    <h4>Get Custom Quote</h4>
+                    <p>Our advisor prepares itemized pricing including delivery, handling, and applicable contractor
+                        discounts.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">3</div>
+                    <h4>Confirm & Pay</h4>
+                    <p>Approve your quote, pay via card, bank transfer, or contractor credit line — and your order is
+                        queued.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">4</div>
+                    <h4>Delivered On-Site</h4>
+                    <p>Our fleet dispatches within 2 hours with real-time GPS tracking confirmation to your coordinates.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: Account Subscription Pricing Plans -->
+    <section class="section-padding fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Builder Tiers</span>
+                <h2 class="section-title">Account Service Plans</h2>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- DIY Tier -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>DIY Builder</h3>
+                    </div>
+                    <div class="price-code">FREE <span>/ no commitment</span></div>
+                    <ul class="price-features">
+                        <li>✅ Full catalog browsing access</li>
+                        <li>✅ Standard checkout pricing</li>
+                        <li>✅ Same-day store pickup</li>
+                        <li>❌ No credit line</li>
+                        <li>❌ No bulk discounts</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-outline-dark" style="width:100%;">Get Started Free</a>
+                </div>
+
+                <!-- Pro Tier -->
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3>Pro Contractor</h3>
+                    </div>
+                    <div class="price-code">$0 <span>/ apply online</span></div>
+                    <ul class="price-features">
+                        <li>✅ 15% bulk discount on all orders</li>
+                        <li>✅ 30-day interest-free credit</li>
+                        <li>✅ Priority 2-hour site delivery</li>
+                        <li>✅ Dedicated account manager</li>
+                        <li>✅ Monthly itemized invoices</li>
+                    </ul>
+                    <a href="contact.html?inquiry=contractor" class="btn btn-primary" style="width:100%;">Apply Now</a>
+                </div>
+
+                <!-- Enterprise Tier -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Enterprise Firm</h3>
+                    </div>
+                    <div class="price-code">Custom <span>/ contact us</span></div>
+                    <ul class="price-features">
+                        <li>✅ Up to 25% volume pricing</li>
+                        <li>✅ $50,000 credit allowance</li>
+                        <li>✅ Fleet dispatch staging</li>
+                        <li>✅ On-site engineer consultation</li>
+                        <li>✅ Custom Material SLAs</li>
+                    </ul>
+                    <a href="contact.html?inquiry=enterprise" class="btn btn-dark" style="width:100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Client Testimonials -->
+    <section class="section-padding bg-beige fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Proven Trade Results</span>
+                <h2 class="section-title">What Contractors Say</h2>
+            </div>
+
+            <div class="testimonial-grid">
+                <!-- TESTIMONIAL 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                    </div>
+                    <div class="quote-icon-wrap">
+                        <svg class="quote-svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-4.765 2.627-5.023 5.441.562-.115 1.202-.183 1.884-.183 3.013 0 5.124 2.167 5.124 5.378 0 3.86-3.181 6.83-6.974 6.83zm-11.02 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-4.782 2.627-5.04 5.441.562-.115 1.183-.183 1.884-.183 3.01 0 5.107 2.167 5.107 5.378 0 3.86-3.167 6.83-6.957 6.83z" />
+                        </svg>
+                    </div>
+                    <p class="testimonial-text">The 2-hour site delivery is not a gimmick — we've placed 14 separate
+                        bulk cement orders during this season and not once did they miss the 2-hour window. Outstanding
+                        reliability.</p>
+                    <div class="testimonial-author">
+                        <img class="author-image" src="images/avatar_james.png" alt="James Petrov" />
+                        <div class="author-info">
+                            <h4>James Petrov</h4>
+                            <span>Petrov Foundations LLC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TESTIMONIAL 2 (FEATURED) -->
+                <div class="testimonial-card featured">
+                    <div class="testimonial-badge-top">
+                        <span class="badge-dot"></span>
+                        Top Partner
+                    </div>
+                    <div class="testimonial-rating">
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                    </div>
+                    <div class="quote-icon-wrap">
+                        <svg class="quote-svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-4.765 2.627-5.023 5.441.562-.115 1.202-.183 1.884-.183 3.013 0 5.124 2.167 5.124 5.378 0 3.86-3.181 6.83-6.974 6.83zm-11.02 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-4.782 2.627-5.04 5.441.562-.115 1.183-.183 1.884-.183 3.01 0 5.107 2.167 5.107 5.378 0 3.86-3.167 6.83-6.957 6.83z" />
+                        </svg>
+                    </div>
+                    <p class="testimonial-text">Our firm uses Toolix's paint matching service for every residential
+                        repaint project. The computer color scanner matched a 15-year-old original wall tone to near
+                        perfection on first scan.</p>
+                    <div class="testimonial-author">
+                        <img class="author-image" src="images/avatar_alicia.png" alt="Alicia Noor" />
+                        <div class="author-info">
+                            <h4>Alicia Noor</h4>
+                            <span>Noor Interiors Studio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TESTIMONIAL 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <svg class="star-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                    </div>
+                    <div class="quote-icon-wrap">
+                        <svg class="quote-svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-4.765 2.627-5.023 5.441.562-.115 1.202-.183 1.884-.183 3.013 0 5.124 2.167 5.124 5.378 0 3.86-3.181 6.83-6.974 6.83zm-11.02 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-4.782 2.627-5.04 5.441.562-.115 1.183-.183 1.884-.183 3.01 0 5.107 2.167 5.107 5.378 0 3.86-3.167 6.83-6.957 6.83z" />
+                        </svg>
+                    </div>
+                    <p class="testimonial-text">The scaffold tower rental saved our roofing project thousands in
+                        equipment purchase costs. Setup guidance, load ratings, and delivery were all handled
+                        faultlessly by their team.</p>
+                    <div class="testimonial-author">
+                        <img class="author-image" src="images/avatar_chen.png" alt="Chen Wei" />
+                        <div class="author-info">
+                            <h4>Chen Wei</h4>
+                            <span>BuildRight Contractors</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Services FAQ -->
+    <section class="section-padding fade-in">
+        <div class="container">
+            <div class="section-title-wrap">
+                <span class="section-subtitle">Need Help?</span>
+                <h2 class="section-title">Service FAQ</h2>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is the minimum order quantity for bulk materials?
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Minimum bulk order is 10 units or 500kg weight depending on the material. Timber comes in
+                            pallet minimums of 20 boards, while cement sacks start from 50-bag pallets.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I extend a tool or equipment rental period?
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes. Call the rental desk before your return deadline to extend up to 7 additional days at
+                            the same daily rate. Extended beyond 7 days will receive a 10% weekly discount applied.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is the engineering consultation included in a contract account?
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pro and Enterprise accounts receive 3 free consultation hours per month. Additional sessions
+                            are billed at $95/hour with a minimum 2-hour block booking per visit.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How accurate is the computer paint color matching?
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our Spectrophotometer achieves Delta-E accuracy of 0.05 or lower, which is imperceptible to
+                            the human eye. We guarantee a free re-mix within 30 days if there is any visible variation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contractor CTA Bar -->
+    <div class="cta-banner">
+        <div class="container cta-banner-content">
+            <div class="cta-banner-text">
+                <h2>Are You a Licensed Contractor or Builder?</h2>
+                <p>Save up to 20% on all orders, apply for credit lines up to $50,000, and get a dedicated store support
+                    manager.</p>
+            </div>
+            <a href="contact.html" class="btn btn-dark">Open Pro Account</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="container footer-grid">
+                <div class="footer-widget">
+                    <a href="index.html" class="footer-logo">
+                        <svg class="footer-logo-svg" viewBox="0 0 24 24">
+                            <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                        </svg>
+                        <span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span>
+                    </a>
+                    <p>Providing robust construction tools, heavy industrial gear, contractor logistics support, and
+                        elite hardware supplies since 2001.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-widget">
+                    <h3>Store Departments</h3>
+                    <ul>
+                        <li><a href="products.html?category=powertools">Power Tools & Drills</a></li>
+                        <li><a href="products.html?category=handtools">Hand Tools & Wrenches</a></li>
+                        <li><a href="products.html?category=paints">Paints & Brush Kits</a></li>
+                        <li><a href="products.html?category=electrical">Electrical Fittings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Our Company</a></li>
+                        <li><a href="services.html">Services Checklist</a></li>
+                        <li><a href="brands.html">Supplier Brands</a></li>
+                        <li><a href="contact.html">Store Location Map</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p class="footer-newsletter">Stay informed on brand tool arrivals, contractor discount coupons &
+                        sales events.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">SUB</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom bg-dark">
+            <div class="container footer-bottom-content">
+                <p>&copy; 2026 Toolix Tools Inc. Developed with Vanilla HTML/CSS. All rights reserved.</p>
+                <div class="footer-payment">
+                    <svg viewBox="0 0 40 25">
+                        <rect width="40" height="25" rx="3" fill="#2d2d2d" /><text x="50%" y="60%" fill="#a0a0a0"
+                            font-size="8" text-anchor="middle">VISA</text>
+                    </svg>
+                    <svg viewBox="0 0 40 25">
+                        <rect width="40" height="25" rx="3" fill="#2d2d2d" /><text x="50%" y="60%" fill="#a0a0a0"
+                            font-size="8" text-anchor="middle">MC</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" aria-label="Scroll back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
