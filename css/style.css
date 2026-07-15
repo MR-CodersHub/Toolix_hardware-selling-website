@@ -242,13 +242,12 @@ html:not(.dark-mode) .nav-hover-pill {
     color: var(--primary);
 }
 
-/* Toolix brand name styling */
 .toolix-brand {
     font-size: 22px;
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #ffffff;
+    color: inherit;
     line-height: 1;
     font-family: var(--font-primary);
 }
@@ -2849,23 +2848,38 @@ footer {
 }
 
 .footer-logo {
-    font-size: 26px;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     text-decoration: none;
     color: var(--light);
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.footer-logo span {
+.footer-logo .toolix-brand {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-family: var(--font-primary);
+}
+
+.footer-logo .brand-accent-letter {
     color: var(--primary);
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
 }
 
 .footer-logo-svg {
     width: 26px;
     height: 26px;
     fill: var(--primary);
+    filter: drop-shadow(0 0 4px rgba(255, 193, 7, 0.4));
+    flex-shrink: 0;
 }
 
 .footer-widget p {
