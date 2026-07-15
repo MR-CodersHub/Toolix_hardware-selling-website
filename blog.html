@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contractor Insights & Guides | Toolix Hub</title>
+    <meta name="description"
+        content="Read deep building material guides, OSHA safety rules, carpentry methods, high-voltage directives, and store logistics coverage in the Toolix Blog.">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── Blog Page Custom Styling ── */
+        .blog-filter-search-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--gray-light);
+            padding-bottom: 25px;
+        }
+
+        .blog-search-box {
+            position: relative;
+            max-width: 380px;
+            width: 100%;
+        }
+
+        .blog-search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            font-size: 14px;
+            border: 1px solid var(--gray-light);
+            background: var(--bg-light);
+            color: var(--dark);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .blog-search-box input:focus {
+            background: var(--light);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(244, 180, 0, 0.15);
+        }
+
+        .blog-search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            stroke: var(--gray);
+            fill: none;
+            pointer-events: none;
+        }
+
+        .blog-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .blog-filter-btn {
+            padding: 10px 20px;
+            background: var(--light);
+            border: 1px solid var(--gray-light);
+            color: var(--gray);
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.2s ease;
+        }
+
+        .blog-filter-btn:hover,
+        .blog-filter-btn.active {
+            background: var(--primary);
+            color: var(--dark);
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(244, 180, 0, 0.2);
+        }
+
+        /* Tags in Cards */
+        .blog-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .blog-card-tag {
+            font-size: 10px;
+            font-weight: 700;
+            background: var(--bg-light);
+            color: var(--gray);
+            padding: 3px 8px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Highlight match */
+        mark {
+            background: rgba(244, 180, 0, 0.3);
+            color: inherit;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        /* ── Dynamic Blog Modal Reader ── */
+        .blog-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            padding: 20px;
+        }
+
+        .blog-modal.open {
+            display: flex;
+        }
+
+        .blog-modal-content {
+            background: var(--light);
+            border-radius: 8px;
+            max-width: 750px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--gray-light);
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .blog-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: var(--bg-light);
+            border: 1px solid var(--gray-light);
+            font-size: 24px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            z-index: 10;
+            transition: all 0.2s;
+        }
+
+        .blog-modal-close:hover {
+            background: var(--primary);
+            color: var(--dark);
+            border-color: var(--primary);
+        }
+
+        .blog-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.08);
+        }
+
+        .blog-modal-hero {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blog-modal-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .blog-modal-body {
+            padding: 40px;
+        }
+
+        .blog-modal-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .blog-modal-category {
+            color: var(--primary);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .blog-modal-date {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .blog-modal-title {
+            font-family: var(--font-primary);
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--dark);
+            margin-bottom: 20px;
+            line-height: 1.25;
+        }
+
+        .blog-modal-text {
+            color: var(--dark);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .blog-modal-text p {
+            margin-bottom: 18px;
+        }
+
+        .blog-modal-takeaway {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 4px;
+            margin: 25px 0;
+            font-style: italic;
+            color: var(--dark);
+        }
+
+        /* No results element */
+        .blog-no-results {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+            display: none;
+        }
+
+        .blog-no-results svg {
+            width: 60px;
+            height: 60px;
+            stroke: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .blog-no-results h3 {
+            font-family: var(--font-primary);
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .blog-no-results p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* Dark mode modal adaptations */
+        .dark-mode .blog-modal-content {
+            background-color: #1a1a19 !important;
+            border-color: #2c2c2b !important;
+        }
+
+        .dark-mode .blog-modal-close {
+            background-color: #242220 !important;
+            border-color: #383633 !important;
+            color: #ffffff;
+        }
+
+        .dark-mode .blog-modal-close:hover {
+            background-color: var(--primary) !important;
+            color: var(--dark) !important;
+        }
+
+        .dark-mode .blog-modal-takeaway {
+            background-color: #242220 !important;
+        }
+
+        .dark-mode .blog-filter-btn {
+            background: #1c1c1b;
+            border-color: #2c2c2b;
+        }
+
+        .dark-mode .blog-filter-btn.active {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .dark-mode .blog-search-box input {
+            background: #1c1c1b;
+            border-color: #2c2c2b;
+            color: #ffffff;
+        }
+
+        .dark-mode .blog-search-box input:focus {
+            background: #151514;
+        }
+
+        .dark-mode .blog-card-tag {
+            background: #242220;
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            .blog-filter-search-wrap {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .blog-search-box {
+                max-width: 100%;
+            }
+
+            .blog-filters {
+                justify-content: flex-start;
+            }
+
+            .blog-modal-body {
+                padding: 25px;
+            }
+
+            .blog-modal-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+    <script>
+        // Apply theme/RTL early to prevent visual flicker
+        if (localStorage.getItem('toolix-theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+        if (localStorage.getItem('toolix-dir') === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="container topbar-content">
+            <div class="topbar-info">
+                <span>📞 +1-800-AR-TOOLS (800-278-6657)</span>
+                <span>✉️ contractor-support@toolix.com</span>
+                <span>📍 123 Builders Way, Industrial Zone</span>
+            </div>
+            <div class="topbar-links">
+                <span>⏰ Mon-Sat: 7:00 AM - 7:00 PM</span>
+                <a href="contact.html">Store Locator</a>
+                <a href="services.html#contractor-portal">Contractor Account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-main">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="index.html" class="brand-logo" id="logoLink">
+                    <svg class="brand-icon" viewBox="0 0 24 24">
+                        <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                    </svg>
+                    <span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span>
+                </a>
+            </div>
+
+            <!-- Center: Main Navigation Menu -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home2.html">Home 2</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="brands.html">Brands</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li class="active"><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <button class="header-action-btn" id="themeToggleBtn" title="Toggle Light/Dark Mode">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sun-icon"
+                        style="display:none; width:20px; height:20px;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="moon-icon"
+                        style="width:20px; height:20px;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="header-action-btn" id="rtlToggleBtn" title="Toggle RTL/LTR Direction">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lang-icon"
+                        style="width:20px; height:20px;">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="user-menu-wrapper">
+                    <button class="header-action-btn" id="userAccountBtn" title="User Account">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width:20px; height:20px;">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="login.html" class="dropdown-item">Log In</a>
+                        <a href="signup.html" class="dropdown-item">Sign Up</a>
+                    </div>
+                </div>
+                <a href="cart.html" class="header-action-btn" title="Your Cart">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <span class="cart-count">3</span>
+                </a>
+                <!-- Burger menu link for Mobile screens -->
+                <button class="burger-menu" id="burgerMenuBtn" aria-label="Open navigation menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Sidebar Drawer -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="brand-logo" style="font-size: 22px;">
+                <svg class="brand-icon" style="width: 22px; height: 22px;" viewBox="0 0 24 24">
+                    <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                </svg>
+                <span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span>
+            </a>
+            <button class="mobile-close-btn" id="mobileCloseBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="home2.html">Home 2</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="brands.html">Brands</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="mobile-auth-section">
+            <a href="login.html" class="mobile-auth-btn mobile-login-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                    <polyline points="10 17 15 12 10 7" />
+                    <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+                Log In
+            </a>
+            <a href="signup.html" class="mobile-auth-btn mobile-signup-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <line x1="20" y1="8" x2="20" y2="14" />
+                    <line x1="23" y1="11" x2="17" y2="11" />
+                </svg>
+                Sign Up
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Header / Subpage Hero -->
+    <section class="subpage-hero blog-hero">
+        <div class="container">
+            <span class="subpage-hero-eyebrow">Professional Resources</span>
+            <h1 class="subpage-hero-title">Building <span>Insights</span> & Guides</h1>
+            <p class="subpage-hero-desc">Expert articles, jobsite safety regulations, structural product selection tips,
+                and carpentry methods to keep your builds on schedule and fully compliant.</p>
+
+            <div class="subpage-hero-breadcrumbs">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Blog & Insights</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="section-padding fade-in">
+        <div class="container">
+
+            <!-- Filter and Search controls -->
+            <div class="blog-filter-search-wrap">
+                <!-- Tabs -->
+                <div class="blog-filters">
+                    <button class="blog-filter-btn active" data-category="all">All insights</button>
+                    <button class="blog-filter-btn" data-category="guides">Product Guides</button>
+                    <button class="blog-filter-btn" data-category="regulations">OSHA regulations</button>
+                    <button class="blog-filter-btn" data-category="howto">How-to protocols</button>
+                    <button class="blog-filter-btn" data-category="news">Industry News</button>
+                </div>
+                <!-- Search input box -->
+                <div class="blog-search-box">
+                    <svg class="blog-search-icon" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="blogSearchInput" placeholder="Search articles, topics or tags...">
+                </div>
+            </div>
+
+            <!-- Blog Grid (Holds 9 cards) -->
+            <div class="blog-grid" id="blogGridTrack">
+                <!-- System injects cards here -->
+            </div>
+
+            <!-- No results visual -->
+            <div class="blog-no-results" id="blogNoResults">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+                <h3>No Matching Articles Found</h3>
+                <p>We found zero articles matching your search query. Try clearing filters or searching for terms like
+                    "Safety", "OSHA", "Anchor", or "Paint".</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Article Reading Modal -->
+    <div class="blog-modal" id="blogReadModal">
+        <div class="blog-modal-content">
+            <button class="blog-modal-close" id="blogModalCloseBtn">&times;</button>
+            <div class="blog-modal-hero" id="modalHeroBg">
+                <!-- SVG injected dynamically -->
+            </div>
+            <div class="blog-modal-body">
+                <div class="blog-modal-meta">
+                    <span class="blog-modal-category" id="modalCategory">Category</span>
+                    <span class="blog-modal-date" id="modalDate">Date</span>
+                </div>
+                <h2 class="blog-modal-title" id="modalTitle">Article Title</h2>
+                <div class="blog-modal-text" id="modalText">
+                    <!-- Text blocks injected dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter -->
+    <section class="section-padding bg-dark fade-in" style="padding: 60px 0;">
+        <div class="container" style="max-width:700px; text-align:center;">
+            <h2
+                style="font-size:28px; margin-bottom:10px; color:var(--primary); text-transform:uppercase; font-family:var(--font-primary);">
+                Stay Informed, Build Better</h2>
+            <p style="font-size:14px; margin-bottom:25px; color:#cfcfcf;">Join 4,500+ builders. Receive direct updates
+                on local compliance audits, lumber price changes, and new power tools.</p>
+            <form class="newsletter-form" style="max-width: 500px; margin: 0 auto;">
+                <input type="email" placeholder="Your business email address"
+                    style="background:#2d2d2d; border:1px solid #444; color:#fff;" required>
+                <button type="submit" style="background:var(--primary); color:var(--dark);">SUBSCRIBE</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contractor CTA Bar -->
+    <div class="cta-banner">
+        <div class="container cta-banner-content">
+            <div class="cta-banner-text">
+                <h2>Are You a Licensed Contractor or Builder?</h2>
+                <p>Save up to 20% on all orders, apply for credit lines up to $50,000, and get a dedicated store support
+                    manager.</p>
+            </div>
+            <a href="contact.html" class="btn btn-dark">Open Pro Account</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="container footer-grid">
+                <div class="footer-widget">
+                    <a href="index.html" class="footer-logo">
+                        <svg class="footer-logo-svg" viewBox="0 0 24 24">
+                            <path d="M12 2L2 9h4v11h4v-6h4v6h4V9h4L12 2zm1 9h-2V9h2v2zm-2 2h2v2h-2v-2z" />
+                        </svg>
+                        <span class="toolix-brand">Tool<span class="brand-accent-letter">ix</span></span>
+                    </a>
+                    <p>Providing robust construction tools, heavy industrial gear, contractor logistics support, and
+                        elite hardware supplies since 2001.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-widget">
+                    <h3>Store Departments</h3>
+                    <ul>
+                        <li><a href="products.html?category=powertools">Power Tools & Drills</a></li>
+                        <li><a href="products.html?category=handtools">Hand Tools & Wrenches</a></li>
+                        <li><a href="products.html?category=paints">Paints & Brush Kits</a></li>
+                        <li><a href="products.html?category=electrical">Electrical Fittings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Our Company</a></li>
+                        <li><a href="services.html">Services Checklist</a></li>
+                        <li><a href="brands.html">Supplier Brands</a></li>
+                        <li><a href="contact.html">Store Location Map</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p class="footer-newsletter">Stay informed on brand tool arrivals, contractor discount coupons &
+                        sales events.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">SUB</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom bg-dark">
+            <div class="container footer-bottom-content">
+                <p>&copy; 2026 Toolix Tools Inc. All rights reserved.</p>
+                <div class="footer-payment">
+                    <svg viewBox="0 0 40 25">
+                        <rect width="40" height="25" rx="3" fill="#2d2d2d" /><text x="50%" y="60%" fill="#a0a0a0"
+                            font-size="8" text-anchor="middle">VISA</text>
+                    </svg>
+                    <svg viewBox="0 0 40 25">
+                        <rect width="40" height="25" rx="3" fill="#2d2d2d" /><text x="50%" y="60%" fill="#a0a0a0"
+                            font-size="8" text-anchor="middle">MC</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" aria-label="Scroll back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ── Comprehensive 9-Post Database ──
+            const blogPosts = [
+                {
+                    id: 'anchor-selection',
+                    category: 'guides',
+                    catTitle: 'Product Guides',
+                    date: 'July 10, 2026',
+                    tags: ['anchors', 'masonry', 'fasteners'],
+                    title: 'Selecting the Right Concrete Anchor',
+                    excerpt: 'Choosing concrete fasteners requires assessing load limits, anchor depth, moisture exposure, and chemical properties. Learn all anchor variations.',
+                    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80',
+                    content: `
+                        <p>Selecting concrete fasteners is a critical calculation step that builders often overlook during residential and structural layouts. Concrete anchors anchor structural steel plates, wall framing, brackets, and equipment onto dry, reinforced, or hollow masonry surfaces.</p>
+                        <p><strong>Common Anchor Typologies:</strong></p>
+                        <ul>
+                            <li><strong>Sleeve Anchors:</strong> Ideal for brick-and-mortar blocks where shear thresholds remain medium.</li>
+                            <li><strong>Wedge Anchors:</strong> The gold standard for solid poured concrete structural frames where pullout safety factors must remain extremely high.</li>
+                            <li><strong>Drop-in Anchors:</strong> Perfect for overhead pipe grids or cable racks suspended from concrete ceilings.</li>
+                            <li><strong>Concrete Screw Anchors (Tapcons):</strong> Fast installation, removable, and excellent for threshold support structures.</li>
+                        </ul>
+                        <div class="blog-modal-takeaway">
+                            <strong>Key Takeaway:</strong> Always select hot-dip galvanized or 316 stainless anchors for exterior plates or environments exposed to chemical compounds to prevent structural oxidation.
+                        </div>
+                        <p>To accurately calculate safety depth margins, factor in the concrete compressive strength rating (measured in PSI) and ensure your anchor diameter corresponds precisely with the drill bit width recommendation to avoid masonry fracturing.</p>
+                    `
+                },
+                {
+                    id: 'timber-grading',
+                    category: 'guides',
+                    catTitle: 'Product Guides',
+                    date: 'June 28, 2026',
+                    tags: ['timber', 'framing', 'lumber'],
+                    title: 'Structural Timber Grading Guide',
+                    excerpt: 'Understand the critical structural differences between softwood framing timber grades and engineered load-bearing structural studs.',
+                    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80',
+                    content: `
+                        <p>Lumber selection determines whether a structure will sag, flex, or split under environmental load stresses. In commercial lumber distribution, structural timber is sorted systematically into classes depending on the fiber strength density, knot coverage, and moisture content.</p>
+                        <p>Timber falls into two primary categories: <strong>Stress-Graded Softwood</strong> (like Douglas Fir or Southern Yellow Pine) and <strong>Engineered Wood Panels</strong> (LVL or Glulam).</p>
+                        <p><strong>Understanding Timber Markings:</strong></p>
+                        <ul>
+                            <li><strong>Select Structural:</strong> The highest grading level, with tiny, tight knots and minimal splits. Ideal for exposed beams.</li>
+                            <li><strong>No. 1 & No. 2 Grades:</strong> Common framing lumber. No. 2 is widely utilized for studs, rafters, and joists where absolute visual perfection isn't structural.</li>
+                            <li><strong>Stud Grade:</strong> Specifically sawn and matched for load-bearing vertical walls under 10 feet.</li>
+                        </ul>
+                        <div class="blog-modal-takeaway">
+                            <strong>Key Takeaway:</strong> Premium structural timber should be stamped either KD (Kiln Dried) or S-DRY to signify a moisture concentration below 19% to minimize warping.
+                        </div>
+                        <p>Using damp lumber introduces major drywall cracks and squeaky subflooring as timber fibers contract. Make sure you utilize verified framing clips and proper wood-thread screws for code compliance.</p>
+                    `
+                },
+                {
+                    id: 'head-protection',
+                    category: 'regulations',
+                    catTitle: 'OSHA Regulations',
+                    date: 'May 19, 2026',
+                    tags: ['osha', 'safety', 'jobsite'],
+                    title: 'Jobsite Head Protection Regulations',
+                    excerpt: 'Verify OSHA requirements regarding industrial safety helmets parameters, impact resistance ratings, and shield inspection checklists.',
+                    image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80',
+                    content: `
+                        <p>Contractors face strict regulatory audits regarding jobsite safety. Head injuries represent some of the most critical structural site hazards, triggering massive fines and immediate work suspensions if compliant equipment is absent.</p>
+                        <p><strong>OSHA Helmet Standards (ANSI Z89.1):</strong></p>
+                        <ul>
+                            <li><strong>Type I Helmets:</strong> Engineered to shield workers solely from vertical drops or top impacts (e.g., falling tools).</li>
+                            <li><strong>Type II Helmets:</strong> Designed to protect against vertical and lateral side impacts, crucial for workers near moving machinery or swing loads.</li>
+                            <li><strong>Class G (General):</strong> Rated to resist electrical shocks up to 2,200 volts.</li>
+                            <li><strong>Class E (Electrical):</strong> Heavy insulation rating, protecting workers from high voltages up to 20,000 volts.</li>
+                        </ul>
+                        <div class="blog-modal-takeaway">
+                            <strong>Key Takeaway:</strong> Modern hard hats expire. The shell typically needs replacing every 5 years, and suspension systems every 12 months, regardless of visual appearance.
+                        </div>
+                        <p>Inspect safety shields daily for micro-fissures and webbing wear. Never apply stickers or paints directly to the plastic shell, since the solvents can chemically degrade safety ratings.</p>
+                    `
+                },
+                {
+                    id: 'paint-finishes',
+                    category: 'guides',
+                    catTitle: 'Product Guides',
+                    date: 'July 25, 2026',
+                    tags: ['paint', 'coating', 'renovation'],
+                    title: 'Paint Finishes: Gloss vs. Matte',
+                    excerpt: 'Different painting projects demand specific gloss levels. Contrast gloss, semi-gloss, satin, eggshell, and matte coatings for durability and light reflection.',
+                    image: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80',
+                    content: `
+                        <p>Selecting the correct paint finish has technical implications for wear resistance, moisture protection, and coverage quality. The gloss factor determines how much light reflects off the painted dry wall surface.</p>
+                        <p><strong>Analyzing Finish Options:</strong></p>
+                        <ul>
+                            <li><strong>High Gloss:</strong> Exceptionally durable, easy to wipe, and moisture resistant. Best for baseboards, doors, and wet rooms. Shows wall imperfections easily.</li>
+                            <li><strong>Semi-Gloss & Satin:</strong> Great balances of durability and sheen. Ideal for kitchens, active hallways, and children's rooms.</li>
+                            <li><strong>Eggshell:</strong> Soft visual texture, hides wall dimples, and holds up well against light washing. The go-to choice for living rooms.</li>
+                            <li><strong>Matte / Flat:</strong> Maximizes color depth, diffuses light, and hides imperfections. However, cleaning flat finishes is difficult, making them best for ceilings.</li>
+                        </ul>
+                        <div class="blog-modal-takeaway">
+                            <strong>Key Takeaway:</strong> High-moisture areas like bathrooms should run satin or semi-gloss finishes formulated with anti-fungal additives to deter mold growth.
+                        </div>
+                        <p>Applying the correct primer before starting holds binder pigments in place, ensuring rich coverage and preventing moisture peeling.</p>
+                    `
+                },
+                {
+                    id: 'power-tools-diy',
+                    category: 'howto',
+                    catTitle: 'How-to Protocols',
+                    date: 'August 02, 2026',
+                    tags: ['powertools', 'remodeling', 'diy'],
+                    title: 'Essential Power Tools for Home Renovation',
+                    excerpt: 'A complete helper checklist of crucial power gear required for layout, cutting, fastening, and cleanups in medium-scale domestic remodeling.',
+                    image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=800&q=80',
+                    content: `
+                        <p>Stepping into a domestic remodeling project without the appropriate power tools means losing hours on manual tasks. For medium-scale renovations, a curated kit of premium tools makes a major difference.</p>
+                        <p><strong>The Core Reno Power Tool Checklist:</strong></p>
+                        <ul>
+                            <li><strong>Brushless Hammer Drill & Impact Driver Duo:</strong> Dual battery power tools for wall fastening and metal drilling.</li>
+                            <li><strong>Cordless Circular Saw:</strong> Quick, straight lumber adjustments for deck boards and basic wall frames.</li>
+                            <li><strong>Reciprocating Saw (Sawzall):</strong> The demolition workhorse. Instantly cuts nails, copper pipes, old studs, and drywall.</li>
+                            <li><strong>Oscillating Multi-Tool:</strong> Indispensable for flush floor cuts, outlet shapes, and precision sanding.</li>
+                        </ul>
+                        <div class="blog-modal-takeaway">
+                            <strong>Key Takeaway:</strong> Buy brushless tools on a unified battery deck (like 18V or 20V lines) so you can hot-swap packs between tools without stopping.
+                        </div>
+                        <p>Always utilize safety goggles, keep workspace ventilation active, and wear reinforced work gloves to maintain grip control and absorb motor vibrations.</p>
+                    `
+                },
+                {
+                    id: 'osha-electrical',
+                    category: 'regulations',
+                    catTitle: 'OSHA Regulations',
+                    date: 'June 15, 2026',
+                    tags: ['safety', 'electrical', 'highvoltage'],
+                    title: 'OSHA Electrical Safety Guidelines',
+                    excerpt: 'Keep your electrical contracting team compliant with the latest 2026 OSHA safety regulations on high-voltage panels, arc-flash barriers, and clothing.',
+                    image: 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&w=800&q=80',
+                    content: `
+                        <p>OSHA electrical compliance guidelines specify procedures to protect tradespeople working near electrical panels, distribution boxes, and high-voltage grid layouts.</p>
+                        <p><strong>2026 Compliance Directives:</strong></p>
+                        <ul>
+                            <li><strong>Lockout/Tagout (LOTO):</strong> Every feeder switch must be physical-padlock locked, tagged with dates, and checked for residual charge before wiring begins.</li>
+                            <li><strong>Arc-Flash Safety:</strong> Proper PPE must be worn depending on the incident energy calculations of the switchboard.</li>
+                            <li><strong>Boundaries & Distance:</strong> Unauthorized personnel must remain outside the boundary line during active circuit maintenance.</li>
+                        </ul>
+                        <div class="blog-modal-takeaway">
+                            <strong>Key Takeaway:</strong> Insulated tools rated for 1,000V are mandatory for actions inside active electrical panels. Regular hand tools will not prevent electrical transfer.
+                        </div>
+                        <p>Keep safety rubber mats in place on floors before accessing high-voltage cabinets, and inspect insulating layers on electrical testing equipment daily.</p>
+                    `
+                },
+                {
+                    id: 'cement-mixer-rentals',
+                    category: 'howto',
+                    catTitle: 'How-to Protocols',
+                    date: 'April 29, 2026',
+                    tags: ['concrete', 'machinery', 'equipment'],
+                    title: 'How to Rent and Operate Cement Mixers',
+                    excerpt: 'Cement mixing operations require proper load balance, rotation speeds, and safety procedures. Follow these steps to maximize performance and prolong equipment lifespan.',
+                    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80',
+                    content: `
+                        <p>Mixing large quantities of concrete by hand is exhausting and yields inconsistent structural results. Renting a professional portable concrete mixer saves crew energy and produces a homogeneous concrete matrix.</p>
+                        <p><strong>Operation Steps:</strong></p>
+                        <ul>
+                            <li><strong>Site Placement:</strong> Ensure the mixer rests on completely levels ground to prevent rolling during operation.</li>
+                            <li><strong>Adding Water First:</strong> Add approximately half the water load before dry concrete bags. This keeps dry aggregates from sticking to the corners.</li>
+                            <li><strong>Aggregates Ratio:</strong> Load cement, sand, and gravel aggregates in that exact order to avoid motor overload.</li>
+                            <li><strong>Cleaning:</strong> Clean the mixing drum immediately after pouring. Let dry cement accumulate, and your mixer will lose efficiency.</li>
+                        </ul>
+                        <div class="blog-modal-takeaway">
+                            <strong>Key Takeaway:</strong> Run a hose and clean water through the rotating drum with a shovel of gravel to strip off internal cement film.
+                        </div>
+                        <p>Protect your face and eyes from dry silica dust by wearing respirator masks, and wear eye shields during concrete loading steps.</p>
+                    `
+                },
+                {
+                    id: 'carpentry-innovations',
+                    category: 'news',
+                    catTitle: 'Industry News',
+                    date: 'May 05, 2026',
+                    tags: ['carpentry', 'innovations', 'tech'],
+                    title: 'Top 10 Innovations in Carpentry Tools',
+                    excerpt: 'Examine the latest high-productivity building tools including brushless drills, lithium battery advancements, laser level grids, and smart tape controls.',
+                    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80',
+                    content: `
+                        <p>Carpentry is changing rapidly as digital systems integrate with traditional layout workflows. New hand and power tools focus on increasing site productivity, reducing physical strain, and achieving sub-millimeter precision.</p>
+                        <p><strong>Leading Innovations:</strong></p>
+                        <ul>
+                            <li><strong>Smart Electronic Tape Measures:</strong> Measures offsets digitally, instantly outputs dimensions to plans, and calculates area and volumes.</li>
+                            <li><strong>Auto-Calibrating Laser Levels:</strong> PROJECTS 3D 360-degree green laser grids across large frame walls instantly, replacing chalk strings.</li>
+                            <li><strong>Unified Lithium-Power Nailers:</strong> Eliminates bulk air compressors, hoses, and carbon cartridges in modern framing routers.</li>
+                        </ul>
+                        <div class="blog-modal-takeaway">
+                            <strong>Key Takeaway:</strong> Green lasers offer up to 4x better visibility than red lasers under bright daylight conditions, saving layout time on site.
+                        </div>
+                        <p>Integrating these tools reduces project layout timelines, allowing contractors to complete framing layout steps faster with smaller teams.</p>
+                    `
+                },
+                {
+                    id: 'supply-chain-depots',
+                    category: 'news',
+                    catTitle: 'Industry News',
+                    date: 'April 12, 2026',
+                    tags: ['logistics', 'bulksupply', 'shipping'],
+                    title: 'Navigating Supply Chain Logistics',
+                    excerpt: 'An industry report detailing how computerized depots, same-day delivery fleets, and smart inventory trackers prevent downtime at large projects.',
+                    image: 'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=800&q=80',
+                    content: `
+                        <p>Construction logistics depend on precise timing. A delivery delay on key structural components like rebar, concrete mix, or lumber studs can halt an entire project crew, costing builders thousands in daily losses.</p>
+                        <p><strong>Logistics Solutions:</strong></p>
+                        <ul>
+                            <li><strong>Digital Inventory Depots:</strong> Advanced warehouse systems track exact stock counts across distribution warehouses automatically.</li>
+                            <li><strong>GPS Fleet Routing:</strong> Live tracking on delivery trucks lets supervisors anticipate site arrival times down to the minute.</li>
+                            <li><strong>Same-Day Dispatch Agreements:</strong> Close collaboration with supply depots ensures materials are loaded and shipped within hours of order confirmation.</li>
+                        </ul>
+                        <div class="blog-modal-takeaway">
+                            <strong>Key Takeaway:</strong> Plan material orders at least 48 hours before installation to allow buffer time for road freight delays.
+                        </div>
+                        <p>Coordinating delivery times with crane rentals ensures bulky materials are unloaded directly to installation locations, reducing double-handling time.</p>
+                    `
+                }
+            ];
+
+            const gridTrack = document.getElementById('blogGridTrack');
+            const searchInput = document.getElementById('blogSearchInput');
+            const noResultsElement = document.getElementById('blogNoResults');
+            const modal = document.getElementById('blogReadModal');
+            const closeBtn = document.getElementById('blogModalCloseBtn');
+
+            let currentCategory = 'all';
+            let currentSearchQuery = '';
+
+            // --- 1. Rendering Engine ---
+            function renderPosts() {
+                const searchLower = currentSearchQuery.toLowerCase().trim();
+
+                // Filter database
+                const filtered = blogPosts.filter(post => {
+                    const matchesCategory = currentCategory === 'all' || post.category === currentCategory;
+
+                    const matchesSearch = !searchLower ||
+                        post.title.toLowerCase().includes(searchLower) ||
+                        post.excerpt.toLowerCase().includes(searchLower) ||
+                        post.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
+                        post.catTitle.toLowerCase().includes(searchLower);
+
+                    return matchesCategory && matchesSearch;
+                });
+
+                // Clear layout track
+                gridTrack.innerHTML = '';
+
+                if (filtered.length === 0) {
+                    noResultsElement.style.display = 'block';
+                    gridTrack.style.display = 'none';
+                    return;
+                }
+
+                noResultsElement.style.display = 'none';
+                gridTrack.style.display = 'grid';
+
+                // Map & Draw cards
+                filtered.forEach(post => {
+                    // Highlight match in title/excerpt
+                    let highlightedTitle = post.title;
+                    let highlightedExcerpt = post.excerpt;
+
+                    if (searchLower) {
+                        const regex = new RegExp(`(${escapeRegExp(searchLower)})`, 'gi');
+                        highlightedTitle = post.title.replace(regex, '<mark>$1</mark>');
+                        highlightedExcerpt = post.excerpt.replace(regex, '<mark>$1</mark>');
+                    }
+
+                    const tagsHTML = post.tags.map(t => `<span class="blog-card-tag">#${t}</span>`).join('');
+
+                    const card = document.createElement('div');
+                    card.className = 'blog-card';
+                    card.setAttribute('data-category', post.category);
+                    card.innerHTML = `
+                        <div class="blog-image">
+                            <img src="${post.image}" alt="${post.title}" loading="lazy">
+                        </div>
+                        <div class="blog-info">
+                            <span class="blog-date">${post.date}</span>
+                            <h3 class="blog-title">${highlightedTitle}</h3>
+                            <p>${highlightedExcerpt}</p>
+                            <div class="blog-card-tags">
+                                ${tagsHTML}
+                            </div>
+                            <a href="#" class="blog-link read-article-trigger" data-id="${post.id}">
+                                Read Article
+                                <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width:14px; height:14px; margin-left:3px;">
+                                    <polyline points="9 18 15 12 9 6" />
+                                </svg>
+                            </a>
+                        </div>
+                    `;
+                    gridTrack.appendChild(card);
+                });
+            }
+
+            // Regex escape helper
+            function escapeRegExp(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
+            // --- 2. Event Listeners for Filters ---
+            document.querySelectorAll('.blog-filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = btn.getAttribute('data-category');
+                    renderPosts();
+                });
+            });
+
+            // --- 3. Event Listener for Search input ---
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    currentSearchQuery = e.target.value;
+                    renderPosts();
+                });
+            }
+
+            // --- 4. Event delegation for reading modal ---
+            gridTrack.addEventListener('click', (e) => {
+                const trigger = e.target.closest('.read-article-trigger');
+                if (trigger) {
+                    e.preventDefault();
+                    const postId = trigger.getAttribute('data-id');
+                    const post = blogPosts.find(p => p.id === postId);
+                    if (post) {
+                        openModal(post);
+                    }
+                }
+            });
+
+            function openModal(post) {
+                if (!modal) return;
+
+                // Populate elements
+                const modalHero = document.getElementById('modalHeroBg');
+                const modalCategory = document.getElementById('modalCategory');
+                const modalDate = document.getElementById('modalDate');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalText = document.getElementById('modalText');
+
+                modalHero.innerHTML = `<img src="${post.image}" alt="${post.title}" style="width:100%;height:100%;object-fit:cover;">`;
+                modalCategory.textContent = post.catTitle;
+                modalDate.textContent = post.date;
+                modalTitle.textContent = post.title;
+                modalText.innerHTML = post.content;
+
+                // Open overlay
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Lock background scroll
+            }
+
+            function closeModal() {
+                if (!modal) return;
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+            }
+
+            // Click outside modal content to close
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+            }
+
+            // ESC key support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+
+            // --- 5. Initial Execution ---
+            renderPosts();
+        });
+    </script>
+</body>
+
+</html>
