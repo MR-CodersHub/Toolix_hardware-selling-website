@@ -3016,11 +3016,24 @@ textarea.form-control {
 footer {
     background-color: var(--dark-deep);
     color: var(--gray-light);
+    font-family: var(--font-secondary);
+    position: relative;
+}
+
+/* Add a glowing premium accent line at the top */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--dark-deep) 0%, var(--primary) 50%, var(--dark-deep) 100%);
 }
 
 .footer-top {
-    border-bottom: 1px solid var(--dark-light);
-    padding: 70px 0 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 80px 0 50px;
 }
 
 .footer-grid {
@@ -3029,8 +3042,42 @@ footer {
     gap: 40px;
 }
 
+.footer-widget h3 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--light);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-family: var(--font-primary);
+    position: relative;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-widget h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 35px;
+    height: 2px;
+    background-color: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+    transition: width 0.3s ease;
+}
+
+[dir="rtl"] .footer-widget h3::after {
+    left: auto;
+    right: 0;
+}
+
+.footer-widget:hover h3::after {
+    width: 60px;
+}
+
 .footer-logo {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -3040,54 +3087,26 @@ footer {
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
+    transition: var(--transition);
 }
 
-.footer-logo .toolix-brand {
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--primary);
-    font-family: var(--font-primary);
-}
-
-.footer-logo .brand-accent-letter {
-    color: var(--primary);
-    text-shadow: 0 0 12px rgba(255, 193, 7, 0.45);
+.footer-logo:hover {
+    transform: translateY(-2px);
 }
 
 .footer-logo-svg {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     fill: var(--primary);
-    filter: drop-shadow(0 0 4px rgba(255, 193, 7, 0.4));
+    filter: drop-shadow(0 0 6px rgba(255, 193, 7, 0.5));
     flex-shrink: 0;
 }
 
 .footer-widget p {
     font-size: 14px;
-    color: var(--gray-light);
-    margin-bottom: 20px;
-}
-
-.footer-widget h3 {
-    font-size: 16px;
-    color: var(--light);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    font-family: var(--font-primary);
-    position: relative;
-    padding-bottom: 8px;
-}
-
-.footer-widget h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background-color: var(--primary);
+    color: #b0aba0;
+    line-height: 1.7;
+    margin-bottom: 25px;
 }
 
 .footer-widget ul {
@@ -3095,58 +3114,100 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-widget ul li a {
-    color: var(--gray-light);
+    color: #b0aba0;
     text-decoration: none;
-    font-size: 14px;
-    transition: var(--transition);
-    display: flex;
+    font-size: 14.5px;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    font-weight: 500;
 }
 
 .footer-widget ul li a::before {
-    content: '▪';
+    content: '→';
     color: var(--primary);
-    font-size: 10px;
+    font-size: 12px;
+    transition: transform 0.25s ease;
+}
+
+[dir="rtl"] .footer-widget ul li a::before {
+    content: '←';
 }
 
 .footer-widget ul li a:hover {
     color: var(--primary);
-    padding-left: 5px;
+    transform: translateX(6px);
 }
 
-.footer-contact-info {
+[dir="rtl"] .footer-widget ul li a:hover {
+    transform: translateX(-6px);
+}
+
+.footer-widget ul li a:hover::before {
+    transform: scale(1.2);
+}
+
+/* Social Buttons redesigned as premium neon items */
+.social-links {
     display: flex;
-    flex-direction: column;
     gap: 15px;
+    margin-top: 10px;
 }
 
-.footer-contact-item {
+.social-btn {
     display: flex;
-    gap: 15px;
-    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--light);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
-.footer-contact-item svg {
+.social-btn svg {
     width: 18px;
     height: 18px;
+    stroke: var(--light);
+    fill: none;
+    transition: var(--transition);
+}
+
+.social-btn:hover {
+    background: rgba(244, 180, 0, 0.08);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 12px rgba(244, 180, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.social-btn:hover svg {
     stroke: var(--primary);
-    flex: 0 0 18px;
 }
 
-.footer-newsletter p {
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
+/* Newsletter block styles */
 .newsletter-form {
     display: flex;
-    background: var(--dark-light);
-    padding: 4px;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(244, 180, 0, 0.15);
 }
 
 .newsletter-form input {
@@ -3156,28 +3217,46 @@ footer {
     color: var(--light);
     padding: 8px 12px;
     font-size: 14px;
+    font-family: var(--font-secondary);
 }
 
 .newsletter-form input:focus {
     outline: none;
 }
 
+.newsletter-form input::placeholder {
+    color: #666666;
+}
+
 .newsletter-form button {
     background: var(--primary);
+    color: var(--dark);
+    font-family: var(--font-primary);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.5px;
     border: none;
-    padding: 8px 16px;
-    font-weight: bold;
+    padding: 10px 18px;
+    border-radius: 4px;
     cursor: pointer;
     transition: var(--transition);
+    text-transform: uppercase;
 }
 
 .newsletter-form button:hover {
     background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(244, 180, 0, 0.2);
 }
 
+/* Footer Bottom Bar */
 .footer-bottom {
+    background-color: #0b0b0a;
     padding: 25px 0;
-    font-size: 13px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #888888;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .footer-bottom-content {
@@ -3186,15 +3265,68 @@ footer {
     align-items: center;
 }
 
-.footer-payment {
-    display: flex;
-    gap: 10px;
+.footer-bottom-content p {
+    margin: 0;
 }
 
-.footer-payment svg {
-    width: 40px;
-    height: 25px;
-    fill: var(--gray-light);
+.footer-payment {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.payment-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #888888;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.payment-card svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+}
+
+.payment-card:hover {
+    color: var(--light);
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive Footer adjustments */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .footer-top {
+        padding: 60px 0 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
 }
 
 /* Page Header (About, Services, Products, Contact etc) */
@@ -4694,6 +4826,10 @@ html:not(.dark-mode) footer {
     border-top: 1px solid var(--gray-border) !important;
 }
 
+html:not(.dark-mode) footer::before {
+    background: linear-gradient(90deg, var(--bg-light) 0%, var(--primary) 50%, var(--bg-light) 100%);
+}
+
 html:not(.dark-mode) .footer-top {
     border-bottom: 1px solid var(--gray-border) !important;
 }
@@ -4702,41 +4838,81 @@ html:not(.dark-mode) .footer-logo {
     color: var(--dark) !important;
 }
 
-.footer-widget h3 {
+html:not(.dark-mode) .footer-widget h3 {
+    color: var(--dark) !important;
+    border-bottom-color: var(--gray-border) !important;
+}
+
+html:not(.dark-mode) .footer-widget h3::after {
+    background-color: var(--primary) !important;
+    box-shadow: none !important;
+}
+
+html:not(.dark-mode) .footer-widget p {
+    color: var(--gray) !important;
+}
+
+html:not(.dark-mode) .footer-widget ul li a {
+    color: var(--gray) !important;
+}
+
+html:not(.dark-mode) .footer-widget ul li a:hover {
+    color: var(--primary-hover) !important;
+}
+
+html:not(.dark-mode) .social-btn {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid var(--gray-border) !important;
+    color: var(--gray) !important;
+}
+
+html:not(.dark-mode) .social-btn svg {
+    stroke: var(--gray) !important;
+}
+
+html:not(.dark-mode) .social-btn:hover {
+    background: rgba(244, 180, 0, 0.1) !important;
+    border-color: var(--primary) !important;
+}
+
+html:not(.dark-mode) .social-btn:hover svg {
+    stroke: var(--primary) !important;
+}
+
+html:not(.dark-mode) .newsletter-form {
+    background: var(--light) !important;
+    border: 1px solid var(--gray-border) !important;
+}
+
+html:not(.dark-mode) .newsletter-form input {
     color: var(--dark) !important;
 }
 
-.footer-widget p {
-    color: var(--gray) !important;
+html:not(.dark-mode) .newsletter-form input::placeholder {
+    color: #999999 !important;
 }
 
-.footer-widget ul li a {
-    color: var(--gray) !important;
-}
-
-.footer-bottom {
+html:not(.dark-mode) .footer-bottom {
     background-color: var(--light) !important;
     color: var(--gray) !important;
     border-top: 1px solid var(--gray-border) !important;
 }
 
-.footer-bottom.bg-dark {
+html:not(.dark-mode) .footer-bottom.bg-dark {
     background-color: var(--light) !important;
     color: var(--gray) !important;
 }
 
-/* 7. Newsletter Form Light Mode */
-.newsletter-form {
-    background: var(--light) !important;
-    border: 1px solid var(--gray-border) !important;
-}
-
-.newsletter-form input {
-    color: var(--dark) !important;
-}
-
-.newsletter-form input::placeholder {
+html:not(.dark-mode) .payment-card {
+    background: var(--bg-light) !important;
+    border-color: var(--gray-border) !important;
     color: var(--gray) !important;
+}
+
+html:not(.dark-mode) .payment-card:hover {
+    background: var(--light) !important;
+    color: var(--dark) !important;
+    border-color: var(--gray) !important;
 }
 
 /* 8. bg-dark Sections in Light Mode */
