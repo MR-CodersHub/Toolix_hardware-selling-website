@@ -389,6 +389,188 @@ html:not(.dark-mode) .nav-hover-pill {
     transform: scale(1.1);
 }
 
+/* User Account Button — Desktop, 1024px, 768px only (hidden on mobile) */
+.user-account-btn:hover svg {
+    transform: scale(1.15) translateY(-1px);
+}
+
+/* ── 1024px Responsive Header — Single Row Layout ── */
+@media (max-width: 1024px) {
+
+    /* Tighter container to prevent content overflow */
+    .container {
+        max-width: 100%;
+        padding: 0 12px;
+        box-sizing: border-box;
+    }
+
+    /* Header single-row enforcement */
+    header {
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .header-main {
+        padding: 10px 0;
+        gap: 8px;
+        flex-wrap: nowrap;
+        align-items: center;
+        display: flex;
+        border-bottom: 1px solid var(--dark-light);
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* Logo: compact and fixed width */
+    .logo-container {
+        flex: 0 0 auto;
+        min-width: 0;
+    }
+
+    .brand-logo {
+        font-size: 17px;
+        gap: 0;
+        white-space: nowrap;
+    }
+
+    .brand-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        flex-shrink: 0;
+    }
+
+    .toolix-brand {
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+
+    /* Desktop nav: fill remaining space, items tightly packed */
+    .desktop-nav {
+        flex: 1 1 auto;
+        min-width: 0;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .desktop-nav .nav-links {
+        gap: 0;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .desktop-nav .nav-links>li {
+        flex-shrink: 1;
+        min-width: 0;
+    }
+
+    .desktop-nav .nav-links>li>a {
+        font-size: 11px;
+        padding: 6px 8px;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .desktop-nav .nav-links>li>a::after {
+        left: 8px;
+        right: 8px;
+        height: 1.5px;
+    }
+
+    .desktop-nav .nav-links>li>a::before {
+        font-size: 5px;
+        top: -2px;
+    }
+
+    /* Header actions: compact circle buttons, no labels */
+    .header-actions {
+        gap: 6px;
+        flex-shrink: 0;
+        flex-wrap: nowrap;
+        align-items: center;
+        min-width: 0;
+    }
+
+    .header-action-btn {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        padding: 0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-action-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* RTL/LTR toggle: hide the text label, make it circular */
+    #rtlToggleBtn.header-action-btn {
+        width: 34px !important;
+        height: 34px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        gap: 0 !important;
+        flex: 0 0 34px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    #rtlToggleBtn.header-action-btn::after {
+        display: none !important;
+        content: none !important;
+    }
+
+    #rtlToggleBtn.header-action-btn svg.lang-icon {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .cart-count {
+        width: 15px;
+        height: 15px;
+        font-size: 9px;
+    }
+
+    /* Topbar adjustments for 1024px */
+    .topbar {
+        font-size: 11px;
+    }
+
+    .topbar-info,
+    .topbar-links {
+        gap: 12px;
+    }
+
+    .topbar-info span,
+    .topbar-links span,
+    .topbar-links a {
+        font-size: 11px;
+    }
+
+    /* Brand accent letter scale */
+    .brand-accent-letter {
+        text-shadow: 0 0 10px rgba(255, 193, 7, 0.35);
+    }
+
+    /* Prevent horizontal scroll from any stray elements */
+    body {
+        overflow-x: hidden;
+    }
+}
+
 /* Nav Menu */
 .nav-container {
     display: flex;
@@ -1308,7 +1490,7 @@ html:not(.dark-mode) .hero-search-form:focus-within .hero-search-icon {
 }
 
 .overlay-btn:hover svg {
-    stroke: var(--dark);
+    stroke: #121212;
 }
 
 .product-info {
@@ -2865,7 +3047,7 @@ footer {
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #ffffff;
+    color: inherit;
     font-family: var(--font-primary);
 }
 
@@ -3072,7 +3254,6 @@ footer {
     font-weight: 500;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 1200px) {
     .products-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -3217,6 +3398,84 @@ footer {
 }
 
 @media (max-width: 576px) {
+
+    /* Hide user account button on mobile */
+    .user-account-btn {
+        display: none !important;
+    }
+
+    /* Container adjustment for extra horizontal space on 360px */
+    .container {
+        padding: 0 12px !important;
+    }
+
+    /* Mobile Header Layout Scaling */
+    .header-main {
+        padding: 8px 0 !important;
+        gap: 8px !important;
+    }
+
+    .brand-logo {
+        font-size: 16px !important;
+    }
+
+    .brand-icon {
+        width: 20px !important;
+        height: 20px !important;
+        margin-right: 4px !important;
+    }
+
+    [dir="rtl"] .brand-icon {
+        margin-right: 0 !important;
+        margin-left: 4px !important;
+    }
+
+    .toolix-brand {
+        font-size: 15px !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    .header-actions {
+        gap: 6px !important;
+    }
+
+    .header-action-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .header-action-btn svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    #rtlToggleBtn.header-action-btn {
+        width: 36px !important;
+        height: 36px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        justify-content: center !important;
+        gap: 0 !important;
+    }
+
+    #rtlToggleBtn.header-action-btn::after {
+        display: none !important;
+    }
+
+    .burger-menu {
+        width: 36px !important;
+        height: 36px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+    }
+
+    .burger-menu svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
     .products-grid {
         grid-template-columns: 1fr;
     }
@@ -3225,9 +3484,27 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Stats Counter mobile optimization */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 15px !important;
+        gap: 12px !important;
+    }
+
+    .stat-item {
+        padding: 16px 8px !important;
+    }
+
+    .stat-number {
+        font-size: 28px !important;
+    }
+
+    .stat-label {
+        font-size: 11px !important;
+        letter-spacing: 0px !important;
+    }
+
+    .stat-desc {
+        font-size: 10px !important;
     }
 
     .team-grid {
@@ -3241,6 +3518,13 @@ footer {
     .hero-ctas {
         flex-direction: column;
         gap: 10px;
+    }
+
+    /* Document level overflow prevention */
+    html,
+    body {
+        overflow-x: hidden !important;
+        width: 100vw;
     }
 }
 
@@ -4404,17 +4688,17 @@ header .nav-links>li>a {
 }
 
 /* 6. Footer Light Mode */
-footer {
+html:not(.dark-mode) footer {
     background-color: var(--bg-light) !important;
     color: var(--gray) !important;
     border-top: 1px solid var(--gray-border) !important;
 }
 
-.footer-top {
+html:not(.dark-mode) .footer-top {
     border-bottom: 1px solid var(--gray-border) !important;
 }
 
-.footer-logo {
+html:not(.dark-mode) .footer-logo {
     color: var(--dark) !important;
 }
 
@@ -6899,4 +7183,179 @@ html:not(.dark-mode) .mobile-login-btn:hover {
     color: #000000 !important;
     border-color: #FFFFFF !important;
     box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   📱 Mobile Viewports Responsiveness & Strict Rules (<= 576px)
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 576px) {
+
+    /* Strict overflow-x prevention */
+    html,
+    body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        position: relative !important;
+    }
+
+    .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Keep header on a single row without wrapping, layout breaks or cutoffs */
+    .header-main {
+        padding: 8px 12px !important;
+        gap: 4px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Compact logo container and brand elements */
+    .logo-container {
+        flex: 0 0 auto !important;
+        max-width: 110px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+    }
+
+    .brand-logo {
+        font-size: 15px !important;
+        gap: 0 !important;
+        letter-spacing: 0.5px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+
+    .brand-icon {
+        width: 18px !important;
+        height: 18px !important;
+        margin-right: 3px !important;
+        margin-left: 0 !important;
+    }
+
+    [dir="rtl"] .brand-icon {
+        margin-right: 0 !important;
+        margin-left: 3px !important;
+    }
+
+    .toolix-brand {
+        font-size: 14px !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    /* Header Actions scaling down so they fit beautifully */
+    .header-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 4px !important;
+        flex: 0 0 auto !important;
+        margin: 0 !important;
+    }
+
+    .header-action-btn {
+        width: 32px !important;
+        height: 32px !important;
+        flex: 0 0 32px !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .user-account-btn {
+        display: none !important;
+    }
+
+    .header-action-btn svg {
+        width: 15px !important;
+        height: 15px !important;
+    }
+
+    .user-menu-wrapper {
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .cart-count {
+        width: 14px !important;
+        height: 14px !important;
+        font-size: 8px !important;
+        top: -4px !important;
+        right: -4px !important;
+    }
+
+    /* RTL/LTR Switcher Mobile reduction */
+    #rtlToggleBtn.header-action-btn {
+        width: 32px !important;
+        height: 32px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        justify-content: center !important;
+        gap: 0 !important;
+        flex: 0 0 32px !important;
+    }
+
+    #rtlToggleBtn.header-action-btn::after {
+        display: none !important;
+    }
+
+    /* Burger Menu Mobile reduction */
+    .burger-menu {
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 32px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+    }
+
+    .burger-menu svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    /* Simplified general headers (login details, etc.) alignment */
+    .simplified-header .container {
+        padding: 0 10px !important;
+    }
+
+    .simplified-brand {
+        font-size: 18px !important;
+    }
+
+    .simplified-brand svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .simplified-actions {
+        gap: 6px !important;
+    }
+
+    .simplified-btn {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .simplified-btn svg {
+        width: 15px !important;
+        height: 15px !important;
+    }
 }

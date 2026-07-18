@@ -280,7 +280,7 @@
             align-items: center;
         }
 
-        .input-icon-wrap svg {
+        .input-icon-wrap>svg:first-of-type {
             position: absolute;
             left: 16px;
             width: 18px;
@@ -288,6 +288,41 @@
             color: var(--gray);
             transition: color 0.3s ease;
             pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Eye toggle button for password field */
+        .pw-toggle-btn {
+            position: absolute;
+            right: 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            transition: color 0.2s ease;
+            z-index: 2;
+        }
+
+        [dir="rtl"] .pw-toggle-btn {
+            right: auto;
+            left: 14px;
+        }
+
+        .pw-toggle-btn svg {
+            width: 17px;
+            height: 17px;
+            stroke: currentColor;
+            fill: none;
+            pointer-events: none;
+            transition: stroke 0.2s ease;
+        }
+
+        .pw-toggle-btn:hover {
+            color: var(--primary);
         }
 
         [dir="rtl"] .input-icon-wrap svg {
@@ -305,6 +340,17 @@
             background: var(--light);
             color: var(--dark);
             transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        /* Password input gets extra right padding for eye toggle */
+        .auth-input.password-field {
+            padding-right: 46px;
+        }
+
+        [dir="rtl"] .auth-input.password-field {
+            padding-right: 46px;
+            padding-left: 46px;
         }
 
         .auth-input::placeholder {
@@ -570,13 +616,30 @@
                     <div class="auth-form-group">
                         <label for="loginPassword">Password</label>
                         <div class="input-icon-wrap">
-                            <input type="password" id="loginPassword" class="auth-input" placeholder="••••••••"
-                                required>
+                            <input type="password" id="loginPassword" class="auth-input password-field"
+                                placeholder="••••••••" required autocomplete="current-password">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                             </svg>
+                            <!-- Eye Toggle Button -->
+                            <button type="button" class="pw-toggle-btn" id="pwToggleBtn" title="Show/hide password"
+                                aria-label="Toggle password visibility">
+                                <!-- Eye icon (password hidden) -->
+                                <svg id="eyeIcon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                                <!-- Eye-off icon (password visible) -->
+                                <svg id="eyeOffIcon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" style="display:none;">
+                                    <path
+                                        d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                                    <line x1="1" y1="1" x2="23" y2="23" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
@@ -657,42 +720,96 @@
                 emailInput.type = 'text';
             });
 
-            // Form Submit Logic
+            // ── Password show/hide toggle ──
+            const pwInput = document.getElementById('loginPassword');
+            const pwToggleBtn = document.getElementById('pwToggleBtn');
+            const eyeIcon = document.getElementById('eyeIcon');
+            const eyeOffIcon = document.getElementById('eyeOffIcon');
+
+            pwToggleBtn.addEventListener('click', () => {
+                const isHidden = pwInput.type === 'password';
+                pwInput.type = isHidden ? 'text' : 'password';
+                eyeIcon.style.display = isHidden ? 'none' : 'block';
+                eyeOffIcon.style.display = isHidden ? 'block' : 'none';
+                pwToggleBtn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+            });
+
+            // ── Helper: show feedback banner ──
             const form = document.getElementById('loginMainForm');
             const feedback = document.getElementById('loginFeedback');
 
+            function showFeedback(type, html) {
+                feedback.className = 'form-feedback-auth ' + type;
+                feedback.innerHTML = html;
+            }
+
+            // ── Main form submit ──
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                feedback.className = 'form-feedback-auth loading';
-                feedback.textContent = 'Authenticating credentials secure pipeline...';
+                showFeedback('loading', 'Authenticating credentials through secure pipeline...');
 
+                // Simulate server validation (replace with real API call)
                 setTimeout(() => {
                     const email = emailInput.value.trim();
-                    feedback.className = 'form-feedback-auth success';
-                    feedback.innerHTML = `🏁 <strong>Login Authorized!</strong> Secure redirection in progress. Welcome back ${email.substring(0, 15)}...`;
+                    const password = pwInput.value.trim();
+
+                    if (!email || !password) {
+                        showFeedback('error', '&#x274C; Please fill in all required fields.');
+                        return;
+                    }
+
+                    // Demo: accept any non-empty credentials and redirect
+                    showFeedback('success', '&#x1F3C1; <strong>Login Authorized!</strong> Redirecting to your dashboard&hellip;');
                     setTimeout(() => {
                         window.location.href = 'index.html';
                     }, 1200);
                 }, 1500);
             });
 
-            // social logins mock alerts
+            // ── Google SSO flow ──
             document.getElementById('btnGoogleAuth').addEventListener('click', (e) => {
                 e.preventDefault();
-                alert('Contacting Google SSO authentication channel... Complete login on popup window.');
-            });
-            document.getElementById('btnContractorAuth').addEventListener('click', (e) => {
-                e.preventDefault();
-                alert('Connecting to Contractor Pro Hub vault... Loading smart credentials.');
+                showFeedback('loading', 'Connecting to Google authentication&hellip;');
+
+                // Simulate OAuth round-trip (replace with real OAuth redirect/popup)
+                setTimeout(() => {
+                    // Demo: Randomly simulate success or failure to showcase both states
+                    const authSuccess = Math.random() > 0.3; // 70% success for demo
+                    if (authSuccess) {
+                        showFeedback('success', '&#x2714; <strong>Google Sign-In Successful!</strong> Redirecting&hellip;');
+                        setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+                    } else {
+                        showFeedback('error', '&#x274C; Google authentication could not be completed. Please try again or use email/password login.');
+                    }
+                }, 1800);
             });
 
+            // ── Contractor Pro Hub flow ──
+            document.getElementById('btnContractorAuth').addEventListener('click', (e) => {
+                e.preventDefault();
+                showFeedback('loading', 'Verifying Contractor Pro Hub credentials&hellip;');
+
+                // Simulate license verification (replace with real API call)
+                setTimeout(() => {
+                    const licenseId = emailInput.value.trim();
+                    if (!licenseId) {
+                        showFeedback('error', '&#x274C; Please enter your Contractor License ID in the field above before connecting via Pro Hub.');
+                        return;
+                    }
+                    // Demo: accept any non-empty license ID as valid
+                    showFeedback('success', '&#x2714; <strong>Pro Hub Access Granted!</strong> Redirecting to contractor dashboard&hellip;');
+                    setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+                }, 1800);
+            });
+
+            // ── Forgot password ──
             document.getElementById('forgotPassLink').addEventListener('click', (e) => {
                 e.preventDefault();
                 const userVal = emailInput.value.trim();
                 if (!userVal) {
-                    alert('Please enter your email or ID in the input box first so we can transmit secure reset guidelines.');
+                    showFeedback('error', '&#x26A0; Enter your email or contractor ID above to receive a reset link.');
                 } else {
-                    alert(`Secure access recovery link transmitted successfully to registered contact points of: ${userVal}`);
+                    showFeedback('success', `&#x2709; Recovery link sent to <strong>${userVal.substring(0, 30)}</strong>. Check your inbox.`);
                 }
             });
         });

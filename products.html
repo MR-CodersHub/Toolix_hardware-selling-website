@@ -200,7 +200,7 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.2s;
         }
 
         .prod-action-btn:hover {
@@ -211,6 +211,175 @@
             width: 16px;
             height: 16px;
             stroke: var(--dark);
+            transition: fill 0.2s, stroke 0.2s;
+        }
+
+        /* Wishlist active state */
+        .prod-action-btn.wishlisted svg {
+            fill: #e53935;
+            stroke: #e53935;
+        }
+
+        .prod-action-btn.wishlisted {
+            background: rgba(229, 57, 53, 0.08);
+        }
+
+        .prod-action-btn.wishlist-pulse {
+            animation: wlPulse 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes wlPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            40% {
+                transform: scale(1.35);
+            }
+
+            70% {
+                transform: scale(0.88);
+            }
+        }
+
+        /* Clickable product image cursor */
+        .prod-img-wrap img {
+            cursor: zoom-in;
+        }
+
+        /* ── Lightbox overlay ── */
+        #toolixLightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            background: rgba(0, 0, 0, 0.88);
+            align-items: center;
+            justify-content: center;
+            animation: lbFadeIn 0.22s ease;
+        }
+
+        #toolixLightbox.open {
+            display: flex;
+        }
+
+        @keyframes lbFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .lb-inner {
+            position: relative;
+            max-width: 92vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            animation: lbSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes lbSlide {
+            from {
+                transform: scale(0.88);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lb-img {
+            max-width: 88vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            display: block;
+        }
+
+        .lb-caption {
+            color: rgba(255, 255, 255, 0.8);
+            font-family: var(--font-primary);
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            max-width: 60ch;
+            letter-spacing: 0.3px;
+        }
+
+        .lb-close {
+            position: fixed;
+            top: 18px;
+            right: 22px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #fff;
+            font-size: 22px;
+            line-height: 1;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 9001;
+        }
+
+        .lb-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: rotate(90deg);
+        }
+
+        .lb-nav {
+            display: flex;
+            gap: 12px;
+        }
+
+        .lb-nav-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #fff;
+            transition: background 0.2s;
+            font-size: 20px;
+        }
+
+        .lb-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        .lb-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .lb-counter {
+            position: fixed;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.55);
+            font-family: var(--font-primary);
+            font-size: 12px;
+            font-weight: 700;
         }
 
         .prod-badge-wrap {
@@ -368,6 +537,11 @@
 
             .products-hero-inner h1 {
                 font-size: 32px;
+            }
+
+            /* Larger product images on mobile */
+            .product-card-new .prod-img-wrap {
+                height: 280px;
             }
         }
 
@@ -1128,9 +1302,12 @@
                 const oldPriceHTML = p.oldPrice ? `<del>$${p.oldPrice.toFixed(2)}</del>` : '';
 
                 return `
-                    <div class="product-card-new product-card" data-category="${p.category}" style="display: flex; opacity: 1; transform: scale(1);">
+                    <div class="product-card-new product-card" data-category="${p.category}" data-id="${p.id}" style="display: flex; opacity: 1; transform: scale(1);">
                         <div class="prod-img-wrap">
-                            <img src="${p.image}" alt="${p.name}" loading="lazy">
+                            <img src="${p.image}" alt="${p.name}" loading="lazy"
+                                data-lightbox-src="${p.image}"
+                                data-lightbox-caption="${p.name.replace(/"/g, '&quot;')}"
+                                class="lb-trigger">
                             ${badgeHTML}
                             <div class="prod-actions">
                                 <button class="prod-action-btn quick-view-trigger" data-id="${p.id}" title="Quick View">
@@ -1139,7 +1316,7 @@
                                         <circle cx="12" cy="12" r="3" />
                                     </svg>
                                 </button>
-                                <button class="prod-action-btn" title="Add to Wishlist">
+                                <button class="prod-action-btn wishlist-btn" data-id="${p.id}" title="Add to Wishlist" aria-label="Add to Wishlist">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                                     </svg>
@@ -1184,44 +1361,32 @@
                 });
             });
 
-            // 7. Event delegation for Add to Cart
+            // ── 7. Add to Cart (event delegation) ──
             gridTrack.addEventListener('click', (e) => {
                 const cartBtn = e.target.closest('.product-add-cart');
                 if (cartBtn) {
                     e.preventDefault();
-
-                    // Increment count badge
                     const cartCountBadge = document.querySelector('.cart-count');
                     if (cartCountBadge) {
-                        let currentCount = parseInt(cartCountBadge.textContent || '3') + 1;
-                        cartCountBadge.textContent = currentCount;
+                        let c = parseInt(cartCountBadge.textContent || '0') + 1;
+                        cartCountBadge.textContent = c;
                         cartCountBadge.style.transform = 'scale(1.3)';
                         setTimeout(() => { cartCountBadge.style.transform = 'scale(1)'; }, 200);
                     }
-
-                    // Button feedback visual effect
-                    const originalText = cartBtn.textContent;
+                    const orig = cartBtn.textContent;
                     cartBtn.textContent = 'ADDED!';
-                    cartBtn.style.backgroundColor = '#4CAF50';
-                    cartBtn.style.borderColor = '#4CAF50';
-                    cartBtn.style.color = '#fff';
-                    setTimeout(() => {
-                        cartBtn.textContent = originalText;
-                        cartBtn.style.backgroundColor = '';
-                        cartBtn.style.borderColor = '';
-                        cartBtn.style.color = '';
-                    }, 1000);
+                    cartBtn.style.cssText = 'background:#4CAF50;border-color:#4CAF50;color:#fff;';
+                    setTimeout(() => { cartBtn.textContent = orig; cartBtn.style.cssText = ''; }, 1000);
                 }
             });
 
-            // 8. Event delegation for Quick View Modal
+            // ── 8. Quick View Modal (event delegation) ──
             gridTrack.addEventListener('click', (e) => {
                 const trigger = e.target.closest('.quick-view-trigger');
                 if (trigger) {
                     e.preventDefault();
                     const pid = trigger.getAttribute('data-id');
                     const product = productsList.find(p => p.id === pid);
-
                     if (product) {
                         const modal = document.getElementById('quickViewModal');
                         if (modal) {
@@ -1240,9 +1405,174 @@
                 }
             });
 
-            // Initial render
+            // ── 9. WISHLIST FEATURE ──
+            const WISHLIST_KEY = 'toolix-wishlist';
+
+            function getWishlist() {
+                try { return JSON.parse(localStorage.getItem(WISHLIST_KEY) || '[]'); }
+                catch (_) { return []; }
+            }
+            function saveWishlist(list) {
+                localStorage.setItem(WISHLIST_KEY, JSON.stringify(list));
+            }
+            function updateWishlistBadge() {
+                const count = getWishlist().length;
+                let badge = document.getElementById('wishlistCountBadge');
+                if (!badge) return;
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'flex' : 'none';
+            }
+
+            // Apply persisted wishlist state to all rendered wishlist buttons
+            function applyWishlistState() {
+                const list = getWishlist();
+                document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                    const id = btn.dataset.id;
+                    if (list.includes(id)) {
+                        btn.classList.add('wishlisted');
+                        btn.title = 'Remove from Wishlist';
+                        btn.setAttribute('aria-label', 'Remove from Wishlist');
+                    } else {
+                        btn.classList.remove('wishlisted');
+                        btn.title = 'Add to Wishlist';
+                        btn.setAttribute('aria-label', 'Add to Wishlist');
+                    }
+                });
+            }
+
+            // Wishlist click delegation
+            gridTrack.addEventListener('click', (e) => {
+                const btn = e.target.closest('.wishlist-btn');
+                if (!btn) return;
+                e.preventDefault();
+                e.stopPropagation();
+
+                const id = btn.dataset.id;
+                let list = getWishlist();
+
+                if (list.includes(id)) {
+                    // Remove from wishlist
+                    list = list.filter(i => i !== id);
+                    btn.classList.remove('wishlisted');
+                    btn.title = 'Add to Wishlist';
+                } else {
+                    // Add to wishlist (prevent duplicates)
+                    list.push(id);
+                    btn.classList.add('wishlisted');
+                    btn.title = 'Remove from Wishlist';
+                }
+
+                saveWishlist(list);
+                updateWishlistBadge();
+
+                // Pulse animation
+                btn.classList.remove('wishlist-pulse');
+                void btn.offsetWidth; // reflow to restart animation
+                btn.classList.add('wishlist-pulse');
+                btn.addEventListener('animationend', () => btn.classList.remove('wishlist-pulse'), { once: true });
+            });
+
+            // ── 10. IMAGE LIGHTBOX ──
+            // Build lightbox DOM once
+            const lb = document.createElement('div');
+            lb.id = 'toolixLightbox';
+            lb.setAttribute('role', 'dialog');
+            lb.setAttribute('aria-modal', 'true');
+            lb.setAttribute('aria-label', 'Product image preview');
+            lb.innerHTML = `
+                <button class="lb-close" id="lbClose" aria-label="Close preview" title="Close (Esc)">&times;</button>
+                <div class="lb-inner">
+                    <img class="lb-img" id="lbImg" src="" alt="">
+                    <div class="lb-caption" id="lbCaption"></div>
+                    <div class="lb-nav" id="lbNav">
+                        <button class="lb-nav-btn" id="lbPrev" aria-label="Previous image">&#8592;</button>
+                        <button class="lb-nav-btn" id="lbNext" aria-label="Next image">&#8594;</button>
+                    </div>
+                </div>
+                <div class="lb-counter" id="lbCounter"></div>
+            `;
+            document.body.appendChild(lb);
+
+            let lbImages = []; // [{src, caption}]
+            let lbIdx = 0;
+
+            function lbShow(images, startIdx) {
+                lbImages = images;
+                lbIdx = startIdx;
+                lbRender();
+                lb.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                document.getElementById('lbClose').focus();
+            }
+            function lbHide() {
+                lb.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+            function lbRender() {
+                const cur = lbImages[lbIdx];
+                document.getElementById('lbImg').src = cur.src;
+                document.getElementById('lbImg').alt = cur.caption;
+                document.getElementById('lbCaption').textContent = cur.caption;
+                const showNav = lbImages.length > 1;
+                document.getElementById('lbNav').style.display = showNav ? 'flex' : 'none';
+                document.getElementById('lbPrev').disabled = lbIdx === 0;
+                document.getElementById('lbNext').disabled = lbIdx === lbImages.length - 1;
+                document.getElementById('lbCounter').textContent = showNav ? `${lbIdx + 1} / ${lbImages.length}` : '';
+            }
+
+            document.getElementById('lbClose').addEventListener('click', lbHide);
+            document.getElementById('lbPrev').addEventListener('click', () => { if (lbIdx > 0) { lbIdx--; lbRender(); } });
+            document.getElementById('lbNext').addEventListener('click', () => { if (lbIdx < lbImages.length - 1) { lbIdx++; lbRender(); } });
+            // Close on backdrop click (but not on inner content)
+            lb.addEventListener('click', (e) => { if (e.target === lb) lbHide(); });
+            // Keyboard support
+            document.addEventListener('keydown', (e) => {
+                if (!lb.classList.contains('open')) return;
+                if (e.key === 'Escape') lbHide();
+                if (e.key === 'ArrowLeft' && lbIdx > 0) { lbIdx--; lbRender(); }
+                if (e.key === 'ArrowRight' && lbIdx < lbImages.length - 1) { lbIdx++; lbRender(); }
+            });
+
+            // Delegated click on product images
+            gridTrack.addEventListener('click', (e) => {
+                const img = e.target.closest('.lb-trigger');
+                if (!img) return;
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Collect all visible images for prev/next navigation
+                const allImgs = [...gridTrack.querySelectorAll('.lb-trigger')];
+                const images = allImgs.map(el => ({
+                    src: el.dataset.lightboxSrc || el.src,
+                    caption: el.dataset.lightboxCaption || el.alt
+                }));
+                const clickedIdx = allImgs.indexOf(img);
+                lbShow(images, Math.max(0, clickedIdx));
+            });
+
+            // Initial render + state restore
             renderCategory('all');
+            // applyWishlistState is called after renderCategory sets innerHTML
         });
+
+        // Patch renderCategory to restore wishlist state after each render
+        // We do this outside the DOMContentLoaded scope by observing the grid
+        (function patchRender() {
+            const grid = document.getElementById('productsGridTrack');
+            if (!grid) return;
+            const observer = new MutationObserver(() => {
+                const WISHLIST_KEY = 'toolix-wishlist';
+                let list = [];
+                try { list = JSON.parse(localStorage.getItem(WISHLIST_KEY) || '[]'); } catch (_) { }
+                document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                    if (list.includes(btn.dataset.id)) {
+                        btn.classList.add('wishlisted');
+                        btn.title = btn.setAttribute('aria-label', 'Remove from Wishlist') || 'Remove from Wishlist';
+                    }
+                });
+            });
+            observer.observe(grid, { childList: true, subtree: false });
+        })();
     </script>
 </body>
 

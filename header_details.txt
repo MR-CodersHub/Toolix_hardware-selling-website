@@ -1,0 +1,19 @@
+header block:
+header {
+    background-color: var(--dark);
+    color: var(--light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+header.sticky block:
+header.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    animation: slideDown 0.3s;
+}
