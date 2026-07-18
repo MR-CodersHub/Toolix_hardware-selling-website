@@ -1097,7 +1097,7 @@
     </section>
 
     <!-- ③ PRODUCT CATALOG GRID -->
-    <section class="section-padding fade-in">
+    <section class="section-padding fade-in appear" id="productCatalogSection">
         <div class="container">
             <div class="filter-wrap">
                 <div class="filter-tabs-modern">
@@ -1242,205 +1242,197 @@
 
     <script src="js/script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const productsList = [
-                // Power Tools (5)
-                { id: '1', category: 'powertools', catTitle: 'Power Tools', name: 'Heavy Duty Yellow Rotary Hammer Drill 1500W', price: 189.99, oldPrice: 249.99, image: 'images/products/rotary_hammer_drill.png', badge: 'Save 24%', stars: 5, desc: 'Achieve massive building results with our 1500W Rotary Hammer Drill. Perfect for drilling stones, bricks, wood and steel, featuring safety clutch and robust carbon brush engine.', sku: 'PD-HD-001', brand: 'Atronic Pro', avail: 'In Stock' },
-                { id: '5', category: 'powertools', catTitle: 'Power Tools', name: 'Professional Brushless Circular Saw 18V', price: 149.99, oldPrice: 179.99, image: 'images/products/circular_saw.png', badge: 'Save 17%', stars: 4, desc: 'High velocity brushless circular saw cutting concrete, tiles and sheets cleanly. Equipped with LED alignment rays and precise angle adjusting locks.', sku: 'PD-CS-233', brand: 'Atronic Pro', avail: 'In Stock' },
-                { id: '9', category: 'powertools', catTitle: 'Power Tools', name: 'Industrial Variable Speed Angle Grinder 900W', price: 79.99, oldPrice: 99.99, image: 'images/products/angle_grinder.png', badge: 'Save 20%', stars: 5, desc: 'Achieve massive building results with our 900W Angle Grinder. Ideal for polishing metal, rust removal, and brick cutting, equipped with side handle control.', sku: 'PD-AG-009', brand: 'Atronic Pro', avail: 'In Stock' },
-                { id: '10', category: 'powertools', catTitle: 'Power Tools', name: 'Cordless Compact Lithium-Ion Jigsaw 20V', price: 115.00, oldPrice: null, image: 'images/products/jigsaw.png', badge: 'New', stars: 4, desc: 'Precision cutting jigsaw built lightweight with an ergonomic handle. 4 orbital position options for curved and straight lumber cuts.', sku: 'PD-JS-010', brand: 'Atronic Pro', avail: 'In Stock' },
-                { id: '11', category: 'powertools', catTitle: 'Power Tools', name: 'High Pressure Electric Air Compressor 10 Bar', price: 245.00, oldPrice: 299.00, image: 'images/products/air_compressor.png', badge: 'Save 18%', stars: 4, desc: 'Powerful compressor for spray setups, tyre lines, and pneumatic tools. Incorporates dual outlet pressure indicators and 50L safety tank.', sku: 'PD-AC-011', brand: 'VoltLine', avail: 'In Stock' },
+        /* ── Products Page Script ─────────────────────────────────────────────────
+           Architecture:
+           • bindProductGridEvents()  — Attaches ALL interactive event listeners
+             exactly ONCE (guarded by data-bound flag). Safe to call multiple times.
+           • renderProductGrid()      — Re-renders the product cards into the DOM.
+             Called on EVERY page visit regardless of navigation method.
+           • initProductGrid()        — Calls bind (once) + render (always).
 
-                // Hand Tools (5)
-                { id: '2', category: 'handtools', catTitle: 'Hand Tools', name: 'Precision Mechanical Socket Wrench Set 48pc', price: 59.00, oldPrice: 79.00, image: 'images/products/socket_wrench_set.png', badge: 'Save 25%', stars: 4, desc: 'A complete set of 48 metric and standard sockets with highly durable chrome vanadium finish, robust ratchets, extension rods, and premium heavy-duty carrying box.', sku: 'HT-SW-902', brand: 'Craftsman Hub', avail: 'In Stock' },
-                { id: '6', category: 'handtools', catTitle: 'Hand Tools', name: 'Hardened Premium Steel Anvil & Claw Hammer', price: 24.99, oldPrice: 32.99, image: 'images/products/claw_hammer.png', badge: 'Save 24%', stars: 5, desc: 'Premium high-density forged steel claw hammer built to resist extreme force. Ergonomic non-slip rubber grip absorbs vibrations and minimizes arm straining.', sku: 'HT-CH-551', brand: 'Hardy Tools', avail: 'In Stock' },
-                { id: '12', category: 'handtools', catTitle: 'Hand Tools', name: 'Heavy Duty Chrome Adjustable Wrench Set', price: 39.99, oldPrice: 49.99, image: 'images/products/adjustable_wrench_set.png', badge: 'Save 20%', stars: 4, desc: 'A premium pair of durable wrenches constructed for robust torque application in tight mechanical settings.', sku: 'HT-AW-012', brand: 'Craftsman Hub', avail: 'In Stock' },
-                { id: '13', category: 'handtools', catTitle: 'Hand Tools', name: 'Magnetic Screwdriver 12pc Set', price: 19.99, oldPrice: null, image: 'images/products/screwdriver_set.png', badge: 'New', stars: 4, desc: 'High grip handles with magnetic tip holds screws firmly. Includes precision flathead, Phillips head and extension rods.', sku: 'HT-MS-013', brand: 'Hardy Tools', avail: 'In Stock' },
-                { id: '14', category: 'handtools', catTitle: 'Hand Tools', name: 'Multifunctional Locking Jaw Pliers Set 3pc', price: 29.50, oldPrice: 35.00, image: 'images/products/pliers_set.png', badge: 'Save 15%', stars: 4, desc: 'Ideal locking mechanics for clamping fittings, bolts, sheet materials. Quick release tension pull built in.', sku: 'HT-LP-014', brand: 'Hardy Tools', avail: 'In Stock' },
+           Triggered by:
+           1. DOMContentLoaded        — Fresh / hard-refresh page load
+           2. window.pageshow (persisted=true) — bfcache back/forward restore
+           3. document.visibilitychange — Tab switch / other navigation fallback
+        ───────────────────────────────────────────────────────────────────────── */
 
-                // Paints (5)
-                { id: '3', category: 'paints', catTitle: 'Paints & Coatings', name: 'Gloss Finish High Endurance Weather Paint', price: 45.50, oldPrice: 55.00, image: 'images/products/weather_paint.png', badge: 'Save 17%', stars: 5, desc: 'All-weather maximum protection exterior acrylic latex coating paint. Fights moisture penetration, color fading, mildew, and cracks with 10 years guaranteed protection.', sku: 'PC-WE-341', brand: 'Titan Paints', avail: '12 Cans Left' },
-                { id: '15', category: 'paints', catTitle: 'Paints & Coatings', name: 'Anti-Rust Protective Metal Primer Paint', price: 32.00, oldPrice: null, image: 'images/products/metal_primer_paint.png', badge: 'New', stars: 4, desc: 'Specifically formulated primer coat to repel oxidation and base humidity, perfect for exterior railings and sheet steels.', sku: 'PC-MP-015', brand: 'Titan Paints', avail: '15 Cans Left' },
-                { id: '16', category: 'paints', catTitle: 'Paints & Coatings', name: 'Premium Ceiling Quick-Dry Matte White Emulsion', price: 38.99, oldPrice: 45.00, image: 'images/products/ceiling_emulsion_paint.png', badge: 'Save 13%', stars: 4, desc: 'Super high opacity ceiling paint keeping room spaces bright. Features splatter resistance and low odor compounds.', sku: 'PC-WE-016', brand: 'Titan Paints', avail: 'In Stock' },
-                { id: '17', category: 'paints', catTitle: 'Paints & Coatings', name: 'Eco-Friendly Wood Polish Lacquer', price: 42.00, oldPrice: null, image: 'images/products/wood_polish_lacquer.png', badge: 'New', stars: 4, desc: 'Enhances wood grain beauty while providing a tough liquid resistant surface. Biodegradable and low VOC.', sku: 'PC-WP-017', brand: 'SureGuard', avail: 'In Stock' },
-                { id: '18', category: 'paints', catTitle: 'Paints & Coatings', name: 'Specialized Concrete Floor Epoxy Paint Pack', price: 89.99, oldPrice: 110.00, image: 'images/products/floor_epoxy_paint.png', badge: 'Save 18%', stars: 5, desc: 'Heavy duty epoxy coating resilient to car tires, machine traffic and drops. Ideal for garage floors.', sku: 'PC-CF-018', brand: 'VoltLine', avail: 'In Stock' },
+        /* ── Product dataset ─────────────────────────────────────────────────── */
+        const TOOLIX_PRODUCTS = [
+            // Power Tools (5)
+            { id: '1', category: 'powertools', catTitle: 'Power Tools', name: 'Heavy Duty Yellow Rotary Hammer Drill 1500W', price: 189.99, oldPrice: 249.99, image: 'images/products/rotary_hammer_drill.png', badge: 'Save 24%', stars: 5, desc: 'Achieve massive building results with our 1500W Rotary Hammer Drill. Perfect for drilling stones, bricks, wood and steel, featuring safety clutch and robust carbon brush engine.', sku: 'PD-HD-001', brand: 'Atronic Pro', avail: 'In Stock' },
+            { id: '5', category: 'powertools', catTitle: 'Power Tools', name: 'Professional Brushless Circular Saw 18V', price: 149.99, oldPrice: 179.99, image: 'images/products/circular_saw.png', badge: 'Save 17%', stars: 4, desc: 'High velocity brushless circular saw cutting concrete, tiles and sheets cleanly. Equipped with LED alignment rays and precise angle adjusting locks.', sku: 'PD-CS-233', brand: 'Atronic Pro', avail: 'In Stock' },
+            { id: '9', category: 'powertools', catTitle: 'Power Tools', name: 'Industrial Variable Speed Angle Grinder 900W', price: 79.99, oldPrice: 99.99, image: 'images/products/angle_grinder.png', badge: 'Save 20%', stars: 5, desc: 'Achieve massive building results with our 900W Angle Grinder. Ideal for polishing metal, rust removal, and brick cutting, equipped with side handle control.', sku: 'PD-AG-009', brand: 'Atronic Pro', avail: 'In Stock' },
+            { id: '10', category: 'powertools', catTitle: 'Power Tools', name: 'Cordless Compact Lithium-Ion Jigsaw 20V', price: 115.00, oldPrice: null, image: 'images/products/jigsaw.png', badge: 'New', stars: 4, desc: 'Precision cutting jigsaw built lightweight with an ergonomic handle. 4 orbital position options for curved and straight lumber cuts.', sku: 'PD-JS-010', brand: 'Atronic Pro', avail: 'In Stock' },
+            { id: '11', category: 'powertools', catTitle: 'Power Tools', name: 'High Pressure Electric Air Compressor 10 Bar', price: 245.00, oldPrice: 299.00, image: 'images/products/air_compressor.png', badge: 'Save 18%', stars: 4, desc: 'Powerful compressor for spray setups, tyre lines, and pneumatic tools. Incorporates dual outlet pressure indicators and 50L safety tank.', sku: 'PD-AC-011', brand: 'VoltLine', avail: 'In Stock' },
+            // Hand Tools (5)
+            { id: '2', category: 'handtools', catTitle: 'Hand Tools', name: 'Precision Mechanical Socket Wrench Set 48pc', price: 59.00, oldPrice: 79.00, image: 'images/products/socket_wrench_set.png', badge: 'Save 25%', stars: 4, desc: 'A complete set of 48 metric and standard sockets with highly durable chrome vanadium finish, robust ratchets, extension rods, and premium heavy-duty carrying box.', sku: 'HT-SW-902', brand: 'Craftsman Hub', avail: 'In Stock' },
+            { id: '6', category: 'handtools', catTitle: 'Hand Tools', name: 'Hardened Premium Steel Anvil & Claw Hammer', price: 24.99, oldPrice: 32.99, image: 'images/products/claw_hammer.png', badge: 'Save 24%', stars: 5, desc: 'Premium high-density forged steel claw hammer built to resist extreme force. Ergonomic non-slip rubber grip absorbs vibrations and minimizes arm straining.', sku: 'HT-CH-551', brand: 'Hardy Tools', avail: 'In Stock' },
+            { id: '12', category: 'handtools', catTitle: 'Hand Tools', name: 'Heavy Duty Chrome Adjustable Wrench Set', price: 39.99, oldPrice: 49.99, image: 'images/products/adjustable_wrench_set.png', badge: 'Save 20%', stars: 4, desc: 'A premium pair of durable wrenches constructed for robust torque application in tight mechanical settings.', sku: 'HT-AW-012', brand: 'Craftsman Hub', avail: 'In Stock' },
+            { id: '13', category: 'handtools', catTitle: 'Hand Tools', name: 'Magnetic Screwdriver 12pc Set', price: 19.99, oldPrice: null, image: 'images/products/screwdriver_set.png', badge: 'New', stars: 4, desc: 'High grip handles with magnetic tip holds screws firmly. Includes precision flathead, Phillips head and extension rods.', sku: 'HT-MS-013', brand: 'Hardy Tools', avail: 'In Stock' },
+            { id: '14', category: 'handtools', catTitle: 'Hand Tools', name: 'Multifunctional Locking Jaw Pliers Set 3pc', price: 29.50, oldPrice: 35.00, image: 'images/products/pliers_set.png', badge: 'Save 15%', stars: 4, desc: 'Ideal locking mechanics for clamping fittings, bolts, sheet materials. Quick release tension pull built in.', sku: 'HT-LP-014', brand: 'Hardy Tools', avail: 'In Stock' },
+            // Paints (5)
+            { id: '3', category: 'paints', catTitle: 'Paints & Coatings', name: 'Gloss Finish High Endurance Weather Paint', price: 45.50, oldPrice: 55.00, image: 'images/products/weather_paint.png', badge: 'Save 17%', stars: 5, desc: 'All-weather maximum protection exterior acrylic latex coating paint. Fights moisture penetration, color fading, mildew, and cracks with 10 years guaranteed protection.', sku: 'PC-WE-341', brand: 'Titan Paints', avail: '12 Cans Left' },
+            { id: '15', category: 'paints', catTitle: 'Paints & Coatings', name: 'Anti-Rust Protective Metal Primer Paint', price: 32.00, oldPrice: null, image: 'images/products/metal_primer_paint.png', badge: 'New', stars: 4, desc: 'Specifically formulated primer coat to repel oxidation and base humidity, perfect for exterior railings and sheet steels.', sku: 'PC-MP-015', brand: 'Titan Paints', avail: '15 Cans Left' },
+            { id: '16', category: 'paints', catTitle: 'Paints & Coatings', name: 'Premium Ceiling Quick-Dry Matte White Emulsion', price: 38.99, oldPrice: 45.00, image: 'images/products/ceiling_emulsion_paint.png', badge: 'Save 13%', stars: 4, desc: 'Super high opacity ceiling paint keeping room spaces bright. Features splatter resistance and low odor compounds.', sku: 'PC-WE-016', brand: 'Titan Paints', avail: 'In Stock' },
+            { id: '17', category: 'paints', catTitle: 'Paints & Coatings', name: 'Eco-Friendly Wood Polish Lacquer', price: 42.00, oldPrice: null, image: 'images/products/wood_polish_lacquer.png', badge: 'New', stars: 4, desc: 'Enhances wood grain beauty while providing a tough liquid resistant surface. Biodegradable and low VOC.', sku: 'PC-WP-017', brand: 'SureGuard', avail: 'In Stock' },
+            { id: '18', category: 'paints', catTitle: 'Paints & Coatings', name: 'Specialized Concrete Floor Epoxy Paint Pack', price: 89.99, oldPrice: 110.00, image: 'images/products/floor_epoxy_paint.png', badge: 'Save 18%', stars: 5, desc: 'Heavy duty epoxy coating resilient to car tires, machine traffic and drops. Ideal for garage floors.', sku: 'PC-CF-018', brand: 'VoltLine', avail: 'In Stock' },
+            // Electrical (5)
+            { id: '4', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Smart Indoor Safety Distribution Panel 12-Circuit', price: 120.00, oldPrice: null, image: 'images/products/distribution_panel.png', badge: 'New', stars: 3, desc: '12-circuit consumer main boards distribution panel box with custom surge protection breaker indicators. Certified electrical components for maximum residential integrity.', sku: 'EF-SD-109', brand: 'VoltLine', avail: 'Out of Stock' },
+            { id: '19', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Copper Core Insulated Wire Roll 100m', price: 45.00, oldPrice: 55.00, image: 'images/products/copper_wire.png', badge: 'Save 18%', stars: 4, desc: 'Low resistance high conductivity copper wires for wall conduits and industrial switch arrays.', sku: 'EF-CW-019', brand: 'VoltLine', avail: 'In Stock' },
+            { id: '20', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Waterproof Outdoor Switch Box', price: 15.99, oldPrice: null, image: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Heavy housing switch rated IP66 for outdoor protection against torrential rain storms and garden dust.', sku: 'EF-OS-020', brand: 'VoltLine', avail: 'In Stock' },
+            { id: '21', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Auto-Reset Miniature Circuit Breakers 6-Pack', price: 28.50, oldPrice: null, image: 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Smart power tripping regulators preventing home appliance hazards and wiring overcurrent limits.', sku: 'EF-CB-021', brand: 'VoltLine', avail: 'In Stock' },
+            { id: '22', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Heavy Duty Voltage Surge Protector Strip', price: 34.99, oldPrice: 42.00, image: 'https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 16%', stars: 4, desc: '10 outlet extension with automatic surge filter indicators protecting computers and entertainment electronics.', sku: 'EF-SP-022', brand: 'VoltLine', avail: 'In Stock' },
+            // Safety (5)
+            { id: '7', category: 'safety', catTitle: 'Safety Equipment', name: 'Industrial Heavy Duty Safety Helmet & Visor', price: 34.00, oldPrice: null, image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Certified', stars: 4, desc: 'Impact resistant outer shell helmet with full protection anti-scratch face visor shield, shock absorbing lining, and adjustable headband strap.', sku: 'SE-SH-778', brand: 'SureGuard', avail: 'In Stock' },
+            { id: '23', category: 'safety', catTitle: 'Safety Equipment', name: 'High-Visibility Reflective Safety Vest', price: 12.50, oldPrice: 16.00, image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 21%', stars: 4, desc: 'Fluorescent neon vest with broad reflective strips for night operations on construction sites.', sku: 'SE-RV-023', brand: 'SureGuard', avail: 'In Stock' },
+            { id: '24', category: 'safety', catTitle: 'Safety Equipment', name: 'Steel Toe Waterproof Safety Boots', price: 65.00, oldPrice: 79.99, image: 'https://images.unsplash.com/photo-1516245834210-c4c142787335?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 18%', stars: 4, desc: 'Rigid puncture resistant sole with steel cap toe ensuring heavy component drops protect user feet.', sku: 'SE-SB-024', brand: 'SureGuard', avail: 'In Stock' },
+            { id: '25', category: 'safety', catTitle: 'Safety Equipment', name: 'Safety Protective Eyewear', price: 8.99, oldPrice: null, image: 'https://images.unsplash.com/photo-1584286595398-a59f21d313f5?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Clear polycarbonate safety glasses with wrap-around shielding against flying wood shards or dust particles.', sku: 'SE-PE-025', brand: 'SureGuard', avail: 'In Stock' },
+            { id: '26', category: 'safety', catTitle: 'Safety Equipment', name: 'Premium Double-Filter Respirator Mask', price: 24.50, oldPrice: 30.00, image: 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 18%', stars: 4, desc: 'Dual chemical filter respirator mask preventing inhalation of paint particles, dust, and toxic fumes.', sku: 'SE-RM-026', brand: 'SureGuard', avail: 'In Stock' },
+            // Plumbing (5)
+            { id: '8', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Leak-Proof Brass Ball Valve & Connection Pack', price: 18.50, oldPrice: 22.00, image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 15%', stars: 3, desc: 'Superb quality lead-free brass ball valve connector designed for maximum pressure pipes and domestic hot/cold plumbing integrations.', sku: 'PL-BV-099', brand: 'FlowTech', avail: 'In Stock' },
+            { id: '27', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Flex-Shield Braided Stainless Water Hose', price: 21.99, oldPrice: null, image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Durable reinforced hose for high pressure sinks, bath basins and modern faucets connections.', sku: 'PL-WH-027', brand: 'FlowTech', avail: 'In Stock' },
+            { id: '28', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Pro-Lock PVC Pipe Weld Solvent Adhesive', price: 9.99, oldPrice: 12.50, image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 20%', stars: 4, desc: 'Industrial grade liquid welder creating leak-proof joints on heavy PVC tubes and drain fittings.', sku: 'PL-WA-028', brand: 'FlowTech', avail: 'In Stock' },
+            { id: '29', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Solid Brass Chrome Kitchen Mixer Faucet', price: 85.00, oldPrice: 110.00, image: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 22%', stars: 4, desc: 'Designer heavy chrome faucet with dual temperature knobs and flexible multi-directional faucet hose.', sku: 'PL-KF-029', brand: 'FlowTech', avail: 'In Stock' },
+            { id: '30', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Heavy Duty Cast Iron Pipe Wrench 14"', price: 27.50, oldPrice: null, image: 'https://images.unsplash.com/photo-1611024847487-e26177381a3f?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Robust serrated jaw wrench with sliding adjustment collar, ideal for water main pipes and valves hooks.', sku: 'PL-PW-030', brand: 'FlowTech', avail: 'In Stock' }
+        ];
 
-                // Electrical (5)
-                { id: '4', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Smart Indoor Safety Distribution Panel 12-Circuit', price: 120.00, oldPrice: null, image: 'images/products/distribution_panel.png', badge: 'New', stars: 3, desc: '12-circuit consumer main boards distribution panel box with custom surge protection breaker indicators. Certified electrical components for maximum residential integrity.', sku: 'EF-SD-109', brand: 'VoltLine', avail: 'Out of Stock' },
-                { id: '19', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Copper Core Insulated Wire Roll 100m', price: 45.00, oldPrice: 55.00, image: 'images/products/copper_wire.png', badge: 'Save 18%', stars: 4, desc: 'Low resistance high conductivity copper wires for wall conduits and industrial switch arrays.', sku: 'EF-CW-019', brand: 'VoltLine', avail: 'In Stock' },
-                { id: '20', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Waterproof Outdoor Switch Box', price: 15.99, oldPrice: null, image: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Heavy housing switch rated IP66 for outdoor protection against torrential rain storms and garden dust.', sku: 'EF-OS-020', brand: 'VoltLine', avail: 'In Stock' },
-                { id: '21', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Auto-Reset Miniature Circuit Breakers 6-Pack', price: 28.50, oldPrice: null, image: 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Smart power tripping regulators preventing home appliance hazards and wiring overcurrent limits.', sku: 'EF-CB-021', brand: 'VoltLine', avail: 'In Stock' },
-                { id: '22', category: 'electrical', catTitle: 'Electrical Fittings', name: 'Heavy Duty Voltage Surge Protector Strip', price: 34.99, oldPrice: 42.00, image: 'https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 16%', stars: 4, desc: '10 outlet extension with automatic surge filter indicators protecting computers and entertainment electronics.', sku: 'EF-SP-022', brand: 'VoltLine', avail: 'In Stock' },
+        /* ── Helpers ──────────────────────────────────────────────────────────── */
+        function _getWishlist() {
+            try { return JSON.parse(localStorage.getItem('toolix-wishlist') || '[]'); } catch (_) { return []; }
+        }
+        function _saveWishlist(list) { localStorage.setItem('toolix-wishlist', JSON.stringify(list)); }
 
-                // Safety (5)
-                { id: '7', category: 'safety', catTitle: 'Safety Equipment', name: 'Industrial Heavy Duty Safety Helmet & Visor', price: 34.00, oldPrice: null, image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Certified', stars: 4, desc: 'Impact resistant outer shell helmet with full protection anti-scratch face visor shield, shock absorbing lining, and adjustable headband strap.', sku: 'SE-SH-778', brand: 'SureGuard', avail: 'In Stock' },
-                { id: '23', category: 'safety', catTitle: 'Safety Equipment', name: 'High-Visibility Reflective Safety Vest', price: 12.50, oldPrice: 16.00, image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 21%', stars: 4, desc: 'Fluorescent neon vest with broad reflective strips for night operations on construction sites.', sku: 'SE-RV-023', brand: 'SureGuard', avail: 'In Stock' },
-                { id: '24', category: 'safety', catTitle: 'Safety Equipment', name: 'Steel Toe Waterproof Safety Boots', price: 65.00, oldPrice: 79.99, image: 'https://images.unsplash.com/photo-1516245834210-c4c142787335?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 18%', stars: 4, desc: 'Rigid puncture resistant sole with steel cap toe ensuring heavy component drops protect user feet.', sku: 'SE-SB-024', brand: 'SureGuard', avail: 'In Stock' },
-                { id: '25', category: 'safety', catTitle: 'Safety Equipment', name: 'Safety Protective Eyewear', price: 8.99, oldPrice: null, image: 'https://images.unsplash.com/photo-1584286595398-a59f21d313f5?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Clear polycarbonate safety glasses with wrap-around shielding against flying wood shards or dust particles.', sku: 'SE-PE-025', brand: 'SureGuard', avail: 'In Stock' },
-                { id: '26', category: 'safety', catTitle: 'Safety Equipment', name: 'Premium Double-Filter Respirator Mask', price: 24.50, oldPrice: 30.00, image: 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 18%', stars: 4, desc: 'Dual chemical filter respirator mask preventing inhalation of paint particles, dust, and toxic fumes.', sku: 'SE-RM-026', brand: 'SureGuard', avail: 'In Stock' },
+        function _generateCardHTML(p) {
+            const starsHTML = Array.from({ length: 5 }, (_, i) =>
+                `<svg ${i >= p.stars ? 'class="empty"' : ''} viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`
+            ).join('');
+            const badgeHTML = p.badge
+                ? `<div class="prod-badge-wrap"><span class="${p.badge.includes('Save') ? 'badge-sale' : 'badge-new'}">${p.badge}</span></div>`
+                : '';
+            const oldPriceHTML = p.oldPrice ? `<del>$${p.oldPrice.toFixed(2)}</del>` : '';
 
-                // Plumbing (5)
-                { id: '8', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Leak-Proof Brass Ball Valve & Connection Pack', price: 18.50, oldPrice: 22.00, image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 15%', stars: 3, desc: 'Superb quality lead-free brass ball valve connector designed for maximum pressure pipes and domestic hot/cold plumbing integrations.', sku: 'PL-BV-099', brand: 'FlowTech', avail: 'In Stock' },
-                { id: '27', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Flex-Shield Braided Stainless Water Hose', price: 21.99, oldPrice: null, image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Durable reinforced hose for high pressure sinks, bath basins and modern faucets connections.', sku: 'PL-WH-027', brand: 'FlowTech', avail: 'In Stock' },
-                { id: '28', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Pro-Lock PVC Pipe Weld Solvent Adhesive', price: 9.99, oldPrice: 12.50, image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 20%', stars: 4, desc: 'Industrial grade liquid welder creating leak-proof joints on heavy PVC tubes and drain fittings.', sku: 'PL-WA-028', brand: 'FlowTech', avail: 'In Stock' },
-                { id: '29', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Solid Brass Chrome Kitchen Mixer Faucet', price: 85.00, oldPrice: 110.00, image: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=600&h=600&q=80', badge: 'Save 22%', stars: 4, desc: 'Designer heavy chrome faucet with dual temperature knobs and flexible multi-directional faucet hose.', sku: 'PL-KF-029', brand: 'FlowTech', avail: 'In Stock' },
-                { id: '30', category: 'plumbing', catTitle: 'Plumbing Supplies', name: 'Heavy Duty Cast Iron Pipe Wrench 14"', price: 27.50, oldPrice: null, image: 'https://images.unsplash.com/photo-1611024847487-e26177381a3f?auto=format&fit=crop&w=600&h=600&q=80', badge: 'New', stars: 4, desc: 'Robust serrated jaw wrench with sliding adjustment collar, ideal for water main pipes and valves hooks.', sku: 'PL-PW-030', brand: 'FlowTech', avail: 'In Stock' }
-            ];
-
-            const gridTrack = document.getElementById('productsGridTrack');
-            const countLabel = document.querySelector('.product-count strong');
-
-            // 1. Helper to render HTML card
-            function generateCardHTML(p) {
-                const starsHTML = Array.from({ length: 5 }, (_, i) => `
-                    <svg ${i >= p.stars ? 'class="empty"' : ''} viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                `).join('');
-
-                const badgeHTML = p.badge ? `<div class="prod-badge-wrap"><span class="${p.badge.includes('Save') ? 'badge-sale' : 'badge-new'}">${p.badge}</span></div>` : '';
-                const oldPriceHTML = p.oldPrice ? `<del>$${p.oldPrice.toFixed(2)}</del>` : '';
-
-                return `
-                    <div class="product-card-new product-card" data-category="${p.category}" data-id="${p.id}" style="display: flex; opacity: 1; transform: scale(1);">
-                        <div class="prod-img-wrap">
-                            <img src="${p.image}" alt="${p.name}" loading="lazy"
-                                data-lightbox-src="${p.image}"
-                                data-lightbox-caption="${p.name.replace(/"/g, '&quot;')}"
-                                class="lb-trigger">
-                            ${badgeHTML}
-                            <div class="prod-actions">
-                                <button class="prod-action-btn quick-view-trigger" data-id="${p.id}" title="Quick View">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg>
-                                </button>
-                                <button class="prod-action-btn wishlist-btn" data-id="${p.id}" title="Add to Wishlist" aria-label="Add to Wishlist">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="prod-body">
-                            <span class="prod-cat-tag">${p.catTitle}</span>
-                            <a class="prod-name quick-view-trigger" data-id="${p.id}">${p.name}</a>
-                            <div class="prod-stars">
-                                ${starsHTML}
-                            </div>
-                            <div class="prod-footer">
-                                <div class="prod-price">$${p.price.toFixed(2)} ${oldPriceHTML}</div>
-                                <button class="prod-cart-btn product-add-cart">Add to Cart</button>
-                            </div>
+            return `
+                <div class="product-card-new product-card" data-category="${p.category}" data-id="${p.id}" style="display:flex;opacity:1;transform:scale(1);">
+                    <div class="prod-img-wrap">
+                        <img src="${p.image}" alt="${p.name}" loading="lazy"
+                            data-lightbox-src="${p.image}"
+                            data-lightbox-caption="${p.name.replace(/"/g, '&quot;')}"
+                            class="lb-trigger">
+                        ${badgeHTML}
+                        <div class="prod-actions">
+                            <button class="prod-action-btn quick-view-trigger" data-id="${p.id}" title="Quick View">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                            <button class="prod-action-btn wishlist-btn" data-id="${p.id}" title="Add to Wishlist" aria-label="Add to Wishlist">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                `;
-            }
+                    <div class="prod-body">
+                        <span class="prod-cat-tag">${p.catTitle}</span>
+                        <a class="prod-name quick-view-trigger" data-id="${p.id}">${p.name}</a>
+                        <div class="prod-stars">${starsHTML}</div>
+                        <div class="prod-footer">
+                            <div class="prod-price">$${p.price.toFixed(2)} ${oldPriceHTML}</div>
+                            <button class="prod-cart-btn product-add-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>`;
+        }
 
-            // 2. Render filtered list
-            function renderCategory(cat) {
-                const filtered = cat === 'all'
-                    ? productsList
-                    : productsList.filter(p => p.category === cat);
+        function _getActiveCategory() {
+            const activeBtn = document.querySelector('.filter-btn.active');
+            return activeBtn ? activeBtn.getAttribute('data-category') : 'all';
+        }
 
-                gridTrack.innerHTML = filtered.map(p => generateCardHTML(p)).join('');
-                if (countLabel) countLabel.textContent = filtered.length;
-            }
+        /* ── renderProductGrid() ─────────────────────────────────────────────── */
+        /* Pure rendering — no event listener side-effects. Safe to call N times. */
+        function renderProductGrid() {
+            const gridTrack = document.getElementById('productsGridTrack');
+            const countLabel = document.querySelector('.product-count strong');
+            if (!gridTrack) return;
 
-            // 3. Category switch tabs listener (using stopImmediatePropagation to override main script)
+            // Always ensure the wrapper section is visible (never hidden by CSS animation)
+            const catalogSection = document.getElementById('productCatalogSection');
+            if (catalogSection) catalogSection.classList.add('appear');
+
+            const cat = _getActiveCategory();
+            const filtered = cat === 'all' ? TOOLIX_PRODUCTS : TOOLIX_PRODUCTS.filter(p => p.category === cat);
+
+            gridTrack.innerHTML = filtered.map(_generateCardHTML).join('');
+            if (countLabel) countLabel.textContent = filtered.length;
+
+            // Restore wishlist visual state after every render
+            const wl = _getWishlist();
+            gridTrack.querySelectorAll('.wishlist-btn').forEach(btn => {
+                const active = wl.includes(btn.dataset.id);
+                btn.classList.toggle('wishlisted', active);
+                btn.title = active ? 'Remove from Wishlist' : 'Add to Wishlist';
+                btn.setAttribute('aria-label', active ? 'Remove from Wishlist' : 'Add to Wishlist');
+            });
+        }
+
+        /* ── bindProductGridEvents() ─────────────────────────────────────────── */
+        /* Registers ALL interactive listeners ONCE. Guard: data-bound="1".      */
+        function bindProductGridEvents() {
+            const gridTrack = document.getElementById('productsGridTrack');
+            if (!gridTrack || gridTrack.dataset.bound === '1') return;
+            gridTrack.dataset.bound = '1';
+
+            // ── Filter tabs ──
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopImmediatePropagation();
-
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-
-                    const category = btn.getAttribute('data-category');
-                    renderCategory(category);
+                    renderProductGrid();
                 });
             });
 
-            // ── 7. Add to Cart (event delegation) ──
+            // ── Add to Cart (delegated) ──
             gridTrack.addEventListener('click', (e) => {
                 const cartBtn = e.target.closest('.product-add-cart');
-                if (cartBtn) {
-                    e.preventDefault();
-                    const cartCountBadge = document.querySelector('.cart-count');
-                    if (cartCountBadge) {
-                        let c = parseInt(cartCountBadge.textContent || '0') + 1;
-                        cartCountBadge.textContent = c;
-                        cartCountBadge.style.transform = 'scale(1.3)';
-                        setTimeout(() => { cartCountBadge.style.transform = 'scale(1)'; }, 200);
-                    }
-                    const orig = cartBtn.textContent;
-                    cartBtn.textContent = 'ADDED!';
-                    cartBtn.style.cssText = 'background:#4CAF50;border-color:#4CAF50;color:#fff;';
-                    setTimeout(() => { cartBtn.textContent = orig; cartBtn.style.cssText = ''; }, 1000);
+                if (!cartBtn) return;
+                e.preventDefault();
+                const badge = document.querySelector('.cart-count');
+                if (badge) {
+                    badge.textContent = parseInt(badge.textContent || '0') + 1;
+                    badge.style.transform = 'scale(1.3)';
+                    setTimeout(() => { badge.style.transform = 'scale(1)'; }, 200);
                 }
+                const orig = cartBtn.textContent;
+                cartBtn.textContent = 'ADDED!';
+                cartBtn.style.cssText = 'background:#4CAF50;border-color:#4CAF50;color:#fff;';
+                setTimeout(() => { cartBtn.textContent = orig; cartBtn.style.cssText = ''; }, 1000);
             });
 
-            // ── 8. Quick View Modal (event delegation) ──
+            // ── Quick View Modal (delegated) ──
             gridTrack.addEventListener('click', (e) => {
                 const trigger = e.target.closest('.quick-view-trigger');
-                if (trigger) {
-                    e.preventDefault();
-                    const pid = trigger.getAttribute('data-id');
-                    const product = productsList.find(p => p.id === pid);
-                    if (product) {
-                        const modal = document.getElementById('quickViewModal');
-                        if (modal) {
-                            modal.querySelector('.modal-gallery img').src = product.image;
-                            modal.querySelector('.modal-category').textContent = product.catTitle;
-                            modal.querySelector('.modal-title').textContent = product.name;
-                            modal.querySelector('.modal-price').innerHTML = `$${product.price.toFixed(2)}` +
-                                (product.oldPrice ? ` <del>$${product.oldPrice.toFixed(2)}</del>` : '');
-                            modal.querySelector('.modal-desc').textContent = product.desc;
-                            modal.querySelector('.sku-val').textContent = product.sku;
-                            modal.querySelector('.brand-val').textContent = product.brand;
-                            modal.querySelector('.avail-val').textContent = product.avail;
-                            modal.classList.add('open');
-                        }
-                    }
+                if (!trigger) return;
+                e.preventDefault();
+                const product = TOOLIX_PRODUCTS.find(p => p.id === trigger.getAttribute('data-id'));
+                const modal = document.getElementById('quickViewModal');
+                if (product && modal) {
+                    modal.querySelector('.modal-gallery img').src = product.image;
+                    modal.querySelector('.modal-category').textContent = product.catTitle;
+                    modal.querySelector('.modal-title').textContent = product.name;
+                    modal.querySelector('.modal-price').innerHTML =
+                        `$${product.price.toFixed(2)}` + (product.oldPrice ? ` <del>$${product.oldPrice.toFixed(2)}</del>` : '');
+                    modal.querySelector('.modal-desc').textContent = product.desc;
+                    modal.querySelector('.sku-val').textContent = product.sku;
+                    modal.querySelector('.brand-val').textContent = product.brand;
+                    modal.querySelector('.avail-val').textContent = product.avail;
+                    modal.classList.add('open');
                 }
             });
 
-            // ── 9. WISHLIST FEATURE ──
-            const WISHLIST_KEY = 'toolix-wishlist';
-
-            function getWishlist() {
-                try { return JSON.parse(localStorage.getItem(WISHLIST_KEY) || '[]'); }
-                catch (_) { return []; }
-            }
-            function saveWishlist(list) {
-                localStorage.setItem(WISHLIST_KEY, JSON.stringify(list));
-            }
-            function updateWishlistBadge() {
-                const count = getWishlist().length;
-                let badge = document.getElementById('wishlistCountBadge');
-                if (!badge) return;
-                badge.textContent = count;
-                badge.style.display = count > 0 ? 'flex' : 'none';
-            }
-
-            // Apply persisted wishlist state to all rendered wishlist buttons
-            function applyWishlistState() {
-                const list = getWishlist();
-                document.querySelectorAll('.wishlist-btn').forEach(btn => {
-                    const id = btn.dataset.id;
-                    if (list.includes(id)) {
-                        btn.classList.add('wishlisted');
-                        btn.title = 'Remove from Wishlist';
-                        btn.setAttribute('aria-label', 'Remove from Wishlist');
-                    } else {
-                        btn.classList.remove('wishlisted');
-                        btn.title = 'Add to Wishlist';
-                        btn.setAttribute('aria-label', 'Add to Wishlist');
-                    }
-                });
-            }
-
-            // Wishlist click delegation
+            // ── Wishlist (delegated) ──
             gridTrack.addEventListener('click', (e) => {
                 const btn = e.target.closest('.wishlist-btn');
                 if (!btn) return;
@@ -1448,131 +1440,125 @@
                 e.stopPropagation();
 
                 const id = btn.dataset.id;
-                let list = getWishlist();
-
+                let list = _getWishlist();
                 if (list.includes(id)) {
-                    // Remove from wishlist
                     list = list.filter(i => i !== id);
                     btn.classList.remove('wishlisted');
-                    btn.title = 'Add to Wishlist';
+                    btn.title = btn.getAttribute('aria-label') === undefined
+                        ? 'Add to Wishlist' : 'Add to Wishlist';
                 } else {
-                    // Add to wishlist (prevent duplicates)
                     list.push(id);
                     btn.classList.add('wishlisted');
                     btn.title = 'Remove from Wishlist';
                 }
+                _saveWishlist(list);
 
-                saveWishlist(list);
-                updateWishlistBadge();
-
-                // Pulse animation
                 btn.classList.remove('wishlist-pulse');
-                void btn.offsetWidth; // reflow to restart animation
+                void btn.offsetWidth;
                 btn.classList.add('wishlist-pulse');
                 btn.addEventListener('animationend', () => btn.classList.remove('wishlist-pulse'), { once: true });
             });
 
-            // ── 10. IMAGE LIGHTBOX ──
+            // ── Image Lightbox (delegated) ──
+            let lbImages = [], lbIdx = 0;
+
             // Build lightbox DOM once
-            const lb = document.createElement('div');
-            lb.id = 'toolixLightbox';
-            lb.setAttribute('role', 'dialog');
-            lb.setAttribute('aria-modal', 'true');
-            lb.setAttribute('aria-label', 'Product image preview');
-            lb.innerHTML = `
-                <button class="lb-close" id="lbClose" aria-label="Close preview" title="Close (Esc)">&times;</button>
-                <div class="lb-inner">
-                    <img class="lb-img" id="lbImg" src="" alt="">
-                    <div class="lb-caption" id="lbCaption"></div>
-                    <div class="lb-nav" id="lbNav">
-                        <button class="lb-nav-btn" id="lbPrev" aria-label="Previous image">&#8592;</button>
-                        <button class="lb-nav-btn" id="lbNext" aria-label="Next image">&#8594;</button>
+            let lb = document.getElementById('toolixLightbox');
+            if (!lb) {
+                lb = document.createElement('div');
+                lb.id = 'toolixLightbox';
+                lb.setAttribute('role', 'dialog');
+                lb.setAttribute('aria-modal', 'true');
+                lb.setAttribute('aria-label', 'Product image preview');
+                lb.innerHTML = `
+                    <button class="lb-close" id="lbClose" aria-label="Close preview" title="Close (Esc)">&times;</button>
+                    <div class="lb-inner">
+                        <img class="lb-img" id="lbImg" src="" alt="">
+                        <div class="lb-caption" id="lbCaption"></div>
+                        <div class="lb-nav" id="lbNav">
+                            <button class="lb-nav-btn" id="lbPrev" aria-label="Previous image">&#8592;</button>
+                            <button class="lb-nav-btn" id="lbNext" aria-label="Next image">&#8594;</button>
+                        </div>
                     </div>
-                </div>
-                <div class="lb-counter" id="lbCounter"></div>
-            `;
-            document.body.appendChild(lb);
+                    <div class="lb-counter" id="lbCounter"></div>`;
+                document.body.appendChild(lb);
 
-            let lbImages = []; // [{src, caption}]
-            let lbIdx = 0;
+                const lbRender = () => {
+                    const cur = lbImages[lbIdx];
+                    document.getElementById('lbImg').src = cur.src;
+                    document.getElementById('lbImg').alt = cur.caption;
+                    document.getElementById('lbCaption').textContent = cur.caption;
+                    const multi = lbImages.length > 1;
+                    document.getElementById('lbNav').style.display = multi ? 'flex' : 'none';
+                    document.getElementById('lbPrev').disabled = lbIdx === 0;
+                    document.getElementById('lbNext').disabled = lbIdx === lbImages.length - 1;
+                    document.getElementById('lbCounter').textContent = multi ? `${lbIdx + 1} / ${lbImages.length}` : '';
+                };
+                const lbShow = (imgs, idx) => {
+                    lbImages = imgs; lbIdx = idx; lbRender();
+                    lb.classList.add('open'); document.body.style.overflow = 'hidden';
+                    document.getElementById('lbClose').focus();
+                };
+                const lbHide = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
 
-            function lbShow(images, startIdx) {
-                lbImages = images;
-                lbIdx = startIdx;
-                lbRender();
-                lb.classList.add('open');
-                document.body.style.overflow = 'hidden';
-                document.getElementById('lbClose').focus();
+                document.getElementById('lbClose').addEventListener('click', lbHide);
+                document.getElementById('lbPrev').addEventListener('click', () => { if (lbIdx > 0) { lbIdx--; lbRender(); } });
+                document.getElementById('lbNext').addEventListener('click', () => { if (lbIdx < lbImages.length - 1) { lbIdx++; lbRender(); } });
+                lb.addEventListener('click', (e) => { if (e.target === lb) lbHide(); });
+                document.addEventListener('keydown', (e) => {
+                    if (!lb.classList.contains('open')) return;
+                    if (e.key === 'Escape') lbHide();
+                    if (e.key === 'ArrowLeft' && lbIdx > 0) { lbIdx--; lbRender(); }
+                    if (e.key === 'ArrowRight' && lbIdx < lbImages.length - 1) { lbIdx++; lbRender(); }
+                });
+
+                // Store lbShow on lb element for delegated clicks below
+                lb._lbShow = lbShow;
             }
-            function lbHide() {
-                lb.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-            function lbRender() {
-                const cur = lbImages[lbIdx];
-                document.getElementById('lbImg').src = cur.src;
-                document.getElementById('lbImg').alt = cur.caption;
-                document.getElementById('lbCaption').textContent = cur.caption;
-                const showNav = lbImages.length > 1;
-                document.getElementById('lbNav').style.display = showNav ? 'flex' : 'none';
-                document.getElementById('lbPrev').disabled = lbIdx === 0;
-                document.getElementById('lbNext').disabled = lbIdx === lbImages.length - 1;
-                document.getElementById('lbCounter').textContent = showNav ? `${lbIdx + 1} / ${lbImages.length}` : '';
-            }
 
-            document.getElementById('lbClose').addEventListener('click', lbHide);
-            document.getElementById('lbPrev').addEventListener('click', () => { if (lbIdx > 0) { lbIdx--; lbRender(); } });
-            document.getElementById('lbNext').addEventListener('click', () => { if (lbIdx < lbImages.length - 1) { lbIdx++; lbRender(); } });
-            // Close on backdrop click (but not on inner content)
-            lb.addEventListener('click', (e) => { if (e.target === lb) lbHide(); });
-            // Keyboard support
-            document.addEventListener('keydown', (e) => {
-                if (!lb.classList.contains('open')) return;
-                if (e.key === 'Escape') lbHide();
-                if (e.key === 'ArrowLeft' && lbIdx > 0) { lbIdx--; lbRender(); }
-                if (e.key === 'ArrowRight' && lbIdx < lbImages.length - 1) { lbIdx++; lbRender(); }
-            });
-
-            // Delegated click on product images
             gridTrack.addEventListener('click', (e) => {
                 const img = e.target.closest('.lb-trigger');
                 if (!img) return;
                 e.preventDefault();
                 e.stopPropagation();
-
-                // Collect all visible images for prev/next navigation
                 const allImgs = [...gridTrack.querySelectorAll('.lb-trigger')];
-                const images = allImgs.map(el => ({
-                    src: el.dataset.lightboxSrc || el.src,
-                    caption: el.dataset.lightboxCaption || el.alt
-                }));
-                const clickedIdx = allImgs.indexOf(img);
-                lbShow(images, Math.max(0, clickedIdx));
+                const images = allImgs.map(el => ({ src: el.dataset.lightboxSrc || el.src, caption: el.dataset.lightboxCaption || el.alt }));
+                lb._lbShow(images, Math.max(0, allImgs.indexOf(img)));
             });
+        }
 
-            // Initial render + state restore
-            renderCategory('all');
-            // applyWishlistState is called after renderCategory sets innerHTML
+        /* ── initProductGrid() ───────────────────────────────────────────────── */
+        /* Entry point: bind listeners once, then render. Called on every visit.  */
+        function initProductGrid() {
+            bindProductGridEvents(); // no-op after first call (guarded)
+            renderProductGrid();     // always re-renders the cards
+        }
+
+        /* ── Lifecycle hooks ──────────────────────────────────────────────────── */
+
+        // 1. Fresh page load
+        document.addEventListener('DOMContentLoaded', initProductGrid);
+
+        // 2. bfcache restore — fires when user presses Back/Forward to this page.
+        //    DOMContentLoaded does NOT fire in this case; pageshow does.
+        window.addEventListener('pageshow', (e) => {
+            if (e.persisted) {
+                // rAF ensures DOM is fully active before we touch it
+                requestAnimationFrame(initProductGrid);
+            }
         });
 
-        // Patch renderCategory to restore wishlist state after each render
-        // We do this outside the DOMContentLoaded scope by observing the grid
-        (function patchRender() {
-            const grid = document.getElementById('productsGridTrack');
-            if (!grid) return;
-            const observer = new MutationObserver(() => {
-                const WISHLIST_KEY = 'toolix-wishlist';
-                let list = [];
-                try { list = JSON.parse(localStorage.getItem(WISHLIST_KEY) || '[]'); } catch (_) { }
-                document.querySelectorAll('.wishlist-btn').forEach(btn => {
-                    if (list.includes(btn.dataset.id)) {
-                        btn.classList.add('wishlisted');
-                        btn.title = btn.setAttribute('aria-label', 'Remove from Wishlist') || 'Remove from Wishlist';
-                    }
-                });
-            });
-            observer.observe(grid, { childList: true, subtree: false });
-        })();
+        // 3. Visibility fallback — handles tab-switching and browsers that don't
+        //    use bfcache but still restore a frozen page via their own mechanism.
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                // Only act if the grid is currently empty (not a normal focus-restore)
+                const grid = document.getElementById('productsGridTrack');
+                if (grid && grid.children.length === 0) {
+                    initProductGrid();
+                }
+            }
+        });
     </script>
 </body>
 
