@@ -247,7 +247,7 @@ html:not(.dark-mode) .nav-hover-pill {
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: inherit;
+    color: var(--primary);
     line-height: 1;
     font-family: var(--font-primary);
 }
@@ -3047,13 +3047,13 @@ footer {
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: inherit;
+    color: var(--primary);
     font-family: var(--font-primary);
 }
 
 .footer-logo .brand-accent-letter {
     color: var(--primary);
-    text-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
+    text-shadow: 0 0 12px rgba(255, 193, 7, 0.45);
 }
 
 .footer-logo-svg {
@@ -7286,8 +7286,7 @@ html:not(.dark-mode) .mobile-login-btn:hover {
     }
 
     .user-menu-wrapper {
-        display: flex !important;
-        align-items: center !important;
+        display: none !important;
     }
 
     .cart-count {
